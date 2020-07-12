@@ -1,0 +1,10 @@
+<!--components/navigation/navigation.wxml-->
+<view>
+  <view class='bar bar-class' style='height:{{statusBarHeight}}px'></view>
+  <view class='nav'> 
+    <view class='nav-img' wx:if="{{isShowBack == '1'}}" catchtap='_navToBack'>
+      <image class='img' src='/image/back.png'></image>
+    </view>
+    <view class='nav-title nav-class'>{{title}}</view>
+  </view>
+</view>

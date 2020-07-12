@@ -1,6 +1,23 @@
 /**app.wxss**/
-@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
-.container {
+button{
+  padding: 0;
+  margin: 0;
+}
+button::after{
+  border: 0;
+}
+.img{
   height: 100%;
-  box-sizing: border-box;
-} 
+  width: 100%;
+}
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  z-index: 99;
+}
+.bar{
+  width: 100%;
+}

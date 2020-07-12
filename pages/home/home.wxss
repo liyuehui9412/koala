@@ -1,0 +1,8 @@
+/* pages/search/search.wxss */
+/* 顶部信号栏样式 */
+.barClass{}
+/* 顶部导航栏样式 */
+.navClass{
+  font-size:36rpx;
+  font-weight:600;
+}

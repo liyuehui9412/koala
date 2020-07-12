@@ -1,0 +1,27 @@
+/* pages/navigation/navigation.wxss */
+.bar{
+  width: 100%;
+}
+.nav{
+  height: 44px;
+  line-height: 44px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.nav-img{
+  height: 44rpx;
+  width: 44rpx;
+  position: absolute;
+  top: 22rpx;
+  left: 26rpx;
+}
+.img{
+  height: 100%;
+  width: 100%;
+  vertical-align: top;
+}
+.nav-title{
+  color: #333;
+  font-family:PingFangSC-Semibold,PingFang SC;
+}
