@@ -1,4 +1,5 @@
 //app.js
+import requestApi from './utils/api.js'
 App({
 	onLaunch: function(options) {
 		let that = this
@@ -46,7 +47,15 @@ App({
 				}
 			},
 		})
-		console.log(this.globalData)
+		/**
+		 * 拿openid此处请求接口，判断该用户是否购买过课程，跳转到报名页面或联系页面
+		 */
+		this.loadUserStatus()
+	},
+	// 获取用户信息
+	loadUserStatus() {
+		// 请求接口  参数配置为：type, reqUrl, params, requestNum失败重新发起请求次数
+		requestApi.request()
 	},
 	globalData: {
 		userInfo: null, // 用户信息
