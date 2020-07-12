@@ -1,0 +1,9 @@
+<view class="wrap"> 
+ <view class="top"> 
+  <canvas class="cir" style="width:212px; height:212px;" canvas-id="canvasArc"> 
+  </canvas> 
+  
+  <view class="cc">中间</view> 
+  
+ </view> 
+</view>

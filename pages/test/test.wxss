@@ -1,0 +1,16 @@
+/* pages/test/test.wxss */
+.cir{ 
+ display: inline-block; 
+ margin-top: 20rpx; 
+  
+} 
+  
+.top{ 
+ text-align: center
+} 
+  
+.cc{ 
+   
+ margin-top: -120px; 
+   
+} 
