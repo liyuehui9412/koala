@@ -1,10 +1,14 @@
 {
   "pages": [
-    
+
+    "pages/index/index",
     "pages/answer/answer",
     "pages/examResult/examResult",
     "pages/result/result",
-    "pages/home/home"
+
+    "pages/sign/sign",
+    "pages/home/home",
+    "pages/practiceIndex/practiceIndex"
 
   ],
   "window": {

@@ -1,0 +1,122 @@
+/* pages/sign/sign.wxss */
+.sign_page {
+	width: 100%;
+}
+
+.sign_page_image {
+	width: 100%;
+	margin-bottom: 40rpx;
+}
+
+
+.swiper_box {
+	width: 100%;
+}
+
+
+.bottom_sign_btn {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	display: flex;
+	color: #F7E5CB;
+	font-size: 32rpx;
+	line-height: 100rpx;
+	text-indent: 60rpx;
+	background:linear-gradient(360deg,rgba(29,29,29,1) 0%,rgb(85, 55, 55) 100%);
+}
+
+.price {
+	color:rgba(247,229,203,1);
+	font-weight: 500;
+	font-size: 38rpx;
+	text-indent: 20rpx;
+}
+
+.sign_btn_image {
+	width: 290rpx;
+	height: 110rpx;
+	position: fixed;
+	right: -1rpx;
+	bottom: 0;
+}
+
+.sign_btn_text {
+	width: 290rpx;
+	height: 110rpx;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	font-size: 36rpx;
+	color: #333;
+	line-height: 126rpx;
+	text-indent: 88rpx;
+	font-weight: 500;
+}
+
+.opcity_get_user_info {
+	width: 290rpx;
+	height: 110rpx;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 11;
+	opacity: 0;
+}
+
+.get_phone_bg {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background:rgba(0,0,0,0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.get_phone_box {
+	width: 588rpx;
+	height: 308rpx;
+	background-color: #fff;
+	border-radius:16rpx;
+	text-align: center;
+}
+
+.get_phone_title {
+	font-size: 36rpx;
+	font-weight: 500;
+	color: #3c3c3c;
+	margin-top: 40rpx;
+}
+
+.get_phone_content {
+	margin-top: 24rpx;
+	color: #3c3c3c;
+	font-size: 30rpx;
+}
+
+.get_phone_btn {
+	width:220rpx;
+	height:66rpx;
+	background:rgba(9,191,98,1);
+	border-radius:8rpx;
+	line-height: 66rpx;
+	color: #fff;
+	font-size: 32rpx;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+	margin-top: 34rpx;
+}
+
+.opcity_btn {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+}
