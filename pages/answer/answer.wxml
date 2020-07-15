@@ -1,0 +1,88 @@
+<!--pages/answer/answer.wxml-->
+<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass'></nav>
+<view class='answer' style='margin-top:{{navMarginTop}}px; height:{{statusBarHeight}}px'>
+  
+  <view class="answer-content">
+  
+    <view class="answer-title">
+      <text class="title-type" style="margin-top:{{titleTypeTop}}rpx">单选</text>
+      <text class="title-word">造成交通事故后逃逸且构成犯罪的驾驶人将吊销驾驶证终生不得重新取得驾驶证。</text>
+    </view>
+
+    <view class="title_img">
+      <image class="img" src="/image/title_img.png"></image>
+    </view>
+
+    <view class="answer-item">
+      <view class="item-default">A</view>
+      <view class="item-content">违章行为</view>
+    </view>
+    <view class="answer-item answer-right">
+      <!-- <view class="item-default">B</view> -->
+      <image src="/image/right.png" class="item-img item-right"></image>
+      <view class="item-content">违法行为</view>
+    </view>
+    <view class="answer-item answer-error">
+      <!-- <view class="item-default">C</view> -->
+      <image src="/image/error.png" class="item-img item-error"></image>
+      <view class="item-content">违法行为</view>
+    </view>
+    <view class="answer-item">
+      <view class="item-default">D</view>
+      <view class="item-content">违法行为</view>
+    </view>
+    <view class="answer-item answer-more">
+      <view class="item-default">E</view>
+      <view class="item-content">违法行为</view>
+    </view>
+
+    <view class="answer-choose"> 正确答案 <text class="choose-right">B</text></view>
+    
+    <view class="answer-line"></view>
+
+    <view class="answer-info">
+      <view class="info-title"><text class="info-title-tag"></text>本题技巧</view>
+      <view class="info-detail">违反道路交通安全法律、法规的规定，构成犯罪的，依法追究刑事责任，并由公安机关交通管理部门吊销机动车驾驶证。</view>
+    </view>
+    <view class="answer-info">
+      <view class="info-title"><text class="info-title-tag"></text>试题详解</view>
+      <view class="info-detail">违反道路交通安全法律、法规的规定，构成犯罪的，依法追究刑事责任，并由公安机关交通管理部门吊销机动车驾驶证。</view>
+    </view>
+
+  </view>
+
+  <view class="answer-bottom">
+    <view class="bottom-left">
+      <view class="left-right">
+        <image class="left-right-img" src="/image/right.png"></image>100
+      </view>
+      <view class="left-error">
+        <image class="left-right-img" src="/image/error.png"></image>100
+      </view>
+    </view>
+    <view class="bottom-right">
+      <image class="bottom-right-img" src="/image/topic.png"></image><text class="bottom-right-num">134</text>/500
+    </view>
+  </view>
+
+  <view class="answer-pop" wx:if='{{isQuit}}'>
+    <view class="pop-content">
+      <view class="pop-title">退出考试</view>
+
+      <view class='progress_box'>
+        <canvas class="progress_bg" canvas-id="canvasProgressbg">  </canvas>
+        <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
+        <view class="progress_text">
+          <view class="text_title">剩余未做</view>
+          <view class="text_num">14题</view>
+        </view>  
+      </view>
+      <view class="pop-hint">您确定要退出本次答题吗？</view>
+      <view class="pop-btn">
+        <button class="btn_exercise" hover-class="btn_exercise_hover">退出</button>
+        <button class="btn_back" hover-class="btn_back_hover">继续答题</button>
+      </view>
+    </view>
+  </view>
+
+</view>

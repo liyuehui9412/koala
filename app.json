@@ -1,18 +1,23 @@
 {
   "pages": [
+    
+    "pages/answer/answer",
+    "pages/examResult/examResult",
+    "pages/result/result",
     "pages/home/home"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "navigationStyle":"custom"
+    "navigationStyle": "custom"
   },
   "plugins": {},
   "networkTimeout": {
     "request": 20000,
     "downloadFile": 20000
-  }
-  
+  },
+  "sitemapLocation": "sitemap.json"
 }

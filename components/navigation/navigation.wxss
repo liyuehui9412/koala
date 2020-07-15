@@ -1,6 +1,7 @@
 /* pages/navigation/navigation.wxss */
 .bar{
   width: 100%;
+  background: #fff;
 }
 .nav{
   height: 44px;
@@ -24,4 +25,5 @@
 .nav-title{
   color: #333;
   font-family:PingFangSC-Semibold,PingFang SC;
+  background: #fff;
 }

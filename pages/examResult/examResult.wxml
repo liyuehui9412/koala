@@ -1,0 +1,45 @@
+<!--pages/examResult/examResult.wxml-->
+<!--pages/result/result.wxml-->
+<!-- isShowBack == '1' 的时候，展示后退按钮 -->
+<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass'></nav>
+<view class='result' style='margin-top:{{navMarginTop}}px'>
+  <image class="result_img" src="/image/result_pass.png" wx:if="{{isPass}}"></image>
+  <image class="result_img" src="/image/result_fail.png" wx:else></image>
+
+  <view class="result_header">
+    <view class='progress_box'>
+      <canvas class="progress_bg" canvas-id="canvasProgressbg">  </canvas>
+      <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
+      <view class="progress_text {{isPass ? '':'progress_text_fail'}}">
+        <view class="text_title {{isPass ? '':'text_title_fail'}}">考试通过</view>
+        <view class="text_num {{isPass ? '':'text_num_fail'}}">68</view>
+        <view class="text_hint {{isPass ? '':'text_hint_fail'}}">合格</view>
+      </view>  
+    </view>
+    <view class="header_info">
+      <view class="info_item">
+        <view class="info_item_num">13:41</view>
+        <view class="info_item_title">考试用时</view>
+      </view>
+      <view class="info_item">
+        <view class="info_item_num">13</view>
+        <view class="info_item_title">最佳成绩</view>
+      </view>
+    </view>
+  </view>
+  <view class="result_again">
+    <view class="again_left">
+      <image class="again_left_img" src="/image/result.png"></image>
+      <view class="again_left_content">
+        <view class="content_title">重新考试</view>
+        <view class="content_hint">加深印象，乘胜追击！</view>
+      </view>
+    </view>
+    <button class="again_btn" hover-class="again_btn_hover"  wx:if="{{isPass}}">在考一次</button>
+    <button class="again_btn {{isPass ? '':'again_btn_fail'}}" hover-class="again_btn_hover {{isPass ? '':'again_btn_hover_fail'}}" wx:else>重新考试</button>
+  </view>
+
+
+</view>
+
+

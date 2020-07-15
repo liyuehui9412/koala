@@ -4,9 +4,6 @@ import Api from '../../utils/api.js';
 import Config from '../../utils/config.js';
 
 let app = getApp();
-let iHValue;
-let fromSource;
-let change = false;
 
 Page({
   data: {

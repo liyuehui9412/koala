@@ -27,8 +27,9 @@ App({
 					that.globalData.platform = 'IOS'
 				}
 				that.globalData.systemInfo = res
-				that.globalData.marginTop = res.statusBarHeight + 44
+				that.globalData.marginTop = res.statusBarHeight + 44 
 				that.globalData.proportion = res.screenHeight / res.screenWidth
+				that.globalData.windowHeight = res.windowHeight
 			},
 		})
 	},
@@ -50,5 +51,6 @@ App({
 		businessInfo: null, // 商户信息，由options传入
 		platform: null, // ios还是安卓
 		openId: null,
+		windowHeight: null,
 	},
 })

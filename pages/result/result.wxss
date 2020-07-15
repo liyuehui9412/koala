@@ -1,0 +1,257 @@
+/* pages/result/result.wxss */
+/* 顶部信号栏样式 */
+.barClass{}
+/* 顶部导航栏样式 */
+.navClass{
+  font-size:36rpx;
+  font-weight:600;
+}
+/* wxss */
+/* 这里的宽高是必须大于等于canvas圆环的直径 否则绘制到盒子外面就看不见了 */
+/* 一开始设置 width:440rpx; height:440rpx; 发现 在360X640分辨率的设备，下绘制的圆环跑盒子外去了 */
+/* 小程序使用rpx单位适配 ，但是canvas绘制的是px单位的。所以只能用px单位绘制的圆环在盒子内显示 */
+.progress_box{
+  position: relative;
+  width:100%;
+  height: 100%;  
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: #fff;
+ }
+ .progress_bg{
+  position: absolute;
+  width:220px;
+  height: 220px;
+ }
+ .progress_canvas{
+  width:220px;
+  height: 220px;
+ }
+ .progress_text{
+  position: absolute;
+  height: 147px;
+  width: 147px;
+  border-radius: 100%;
+  background:linear-gradient(360deg,rgba(0,188,150,1) 0%,rgba(43,225,188,1) 100%);
+  box-shadow:0px 0px 12px 0px rgba(0,188,150,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ }
+.text_title{
+  width:100%;
+  text-align: center;
+  height:22px;
+  line-height:22px;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  margin: 26px 0 8px 0;
+}
+.text_num{
+  width:100%;
+  text-align: center;
+  height:70px;
+  line-height:70px;
+  font-size:60px;
+  font-family:DINAlternate-Bold,DINAlternate;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+}
+
+.result_header{
+  width: 100%;
+  background: #F8F8F8;
+}
+.header_info{
+  height: 88rpx;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: 10px solid #F8F8F8;
+  border-radius:0px 0px 20px 20px;
+  background: #fff;
+  padding-bottom: 64rpx;
+}
+.info_item{
+  width: 150rpx;
+  text-align: center;
+}
+.info_item_num{
+  width: 100%;
+  text-align: center;
+  height:56rpx;
+  line-height:56rpx;
+  font-size:48rpx;
+  font-family:DINAlternate-Bold,DINAlternate;
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+  margin: 16rpx 0;
+}
+.info_item_title{
+  width: 100%;
+  text-align: center;
+  height:34rpx;
+  line-height:34rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+}
+.result_detail{
+  width:690rpx;
+  margin: 32rpx auto 16rpx auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.detail_info{
+  display: flex;
+  align-items: flex-end;
+}
+.detail_info_title{
+  font-size:36rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  margin-right: 16rpx;
+}
+.detail_info_num{
+  font-size:28rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(0,188,150,1);
+}
+.detail_info_word{
+  color: #666666;
+}
+.detail_surplus{
+  font-size:32rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+}
+.result_line{
+  width:690rpx;
+  height:12rpx;
+  background:rgba(240,240,240,1);
+  border-radius:12rpx;
+  margin: 0 auto;
+  position: relative;
+}
+.result_line_active{
+  width:64rpx;
+  height:12rpx;
+  background:linear-gradient(270deg,rgba(0,223,199,1) 0%,rgba(0,188,150,1) 100%);
+  border-radius:12rpx;
+}
+.result_line_hint{
+  position: absolute;
+  left: 0;
+  top: 30rpx;
+  width: 80rpx;
+  text-align: center;
+  background:linear-gradient(360deg,rgba(0,188,150,1) 0%,rgba(43,225,188,1) 100%);
+  height:40rpx;
+  line-height:40rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  border-radius: 4rpx;
+}
+.hint_trigon{
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 32rpx;
+  top:-12rpx ;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+  border-bottom: 16rpx solid #2BE1BC;
+  z-index: -1;
+}
+.result_sum{
+  width:100%;
+  text-align: center;
+  height:50rpx;
+  line-height:50rpx;
+  font-size:36rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  margin: 120rpx 0 16rpx 0;
+}
+.sum_num{
+  color: #FF6363;
+}
+.result_hint{
+  width:100%;
+  text-align: center;
+  height:40rpx;
+  line-height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(102,102,102,1);
+}
+.result_btn{
+  width: 690rpx;
+  margin: 36rpx auto 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btn_back{
+  width:286rpx;
+  text-align: center;
+  height:72rpx;
+  line-height: 72rpx;
+  background:linear-gradient(180deg,rgba(0,214,152,1) 0%,rgba(0,188,150,1) 100%);
+  border-radius:40rpx;
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:#fff;
+}
+.btn_back_hover{
+  background:linear-gradient(180deg,rgba(0,188,150,1) 100%,rgba(0,214,152,1) 0);
+}
+.btn_exercise{
+  width:286rpx;
+  text-align: center;
+  height:72rpx;
+  line-height: 72rpx;
+  border-radius:40px;
+  border:2rpx solid rgba(0,188,150,1);
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color: #00BC96;
+  background: #fff;
+  box-sizing: border-box;
+
+}
+.btn_exercise_hover{
+  background: #f8f8f8;
+}
+
+.result_all_right{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 160rpx;
+}
+.all_right_hint{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 26rpx;
+}
+
+
+
+
