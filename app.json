@@ -1,18 +1,21 @@
 {
   "pages": [
-    "pages/home/home"
+    "pages/index/index",
+    "pages/sign/sign",
+    "pages/home/home",
+    "pages/practiceIndex/practiceIndex"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "navigationStyle":"custom"
+    "navigationStyle": "custom"
   },
   "plugins": {},
   "networkTimeout": {
     "request": 20000,
     "downloadFile": 20000
-  }
-  
+  },
+  "sitemapLocation": "sitemap.json"
 }

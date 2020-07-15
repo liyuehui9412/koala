@@ -1,0 +1,43 @@
+<!--pages/sign/sign.wxml-->
+<nav
+	id="nav"
+	title="必过500题"
+	class="nav"
+	bar-class="barClass"
+	isShowBack="0"
+	nav-class="navClass"
+></nav>
+<view style="margin-top:{{ navMarginTop }}px">
+	<view class="sign_page">
+		<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic1.png" lazy-load="true"></image>
+		<view style="padding: 0 20rpx;">
+			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic2.png" lazy-load="true"></image>
+			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic3.png" lazy-load="true"></image>
+			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic4.png" lazy-load="true"></image>
+			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic5.png" lazy-load="true"></image>
+			<view class="swiper_box">
+				<image class="swiper_bg" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_big_swiper.png" lazy-load="true"></image>
+			</view>
+			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic7.png" lazy-load="true"></image>
+		</view>
+	</view>
+	<view style="height:100rpx;"></view>
+	<view class="bottom_sign_btn">
+		<view>科一/科四必考500题 </view>
+		<view class="price">￥49</view>
+		<image class="sign_btn_image" src="../../image/sign_btn.png"></image>
+		<view class="sign_btn_text" bindtap="sign_action">立即报名</view>
+		<button wx:if="{{canIUse}}" class="opcity_get_user_info" open-type="getUserInfo" bindgetuserinfo="get_user_info">授权登录</button>
+	</view>
+	<view class="get_phone_bg" bindtap="close_get_phone" wx:if="{{get_phone_show}}">
+		<view class="get_phone_box" catchtap="show_get_phone">
+			<view class="get_phone_title">授权登录提醒</view>
+			<view class="get_phone_content">必做500题申请获得您的手机号登录</view>
+			<view class="get_phone_btn">
+				授权
+				<button class="opcity_btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+			</view>
+		</view>
+	</view>
+	  
+</view>
