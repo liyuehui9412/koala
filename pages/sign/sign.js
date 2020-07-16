@@ -1,6 +1,5 @@
 // pages/search/search.js
 import Util from '../../utils/util.js'
-import Api from '../../utils/api.js'
 import Config from '../../utils/config.js'
 import { request } from '../../utils/api'
 
@@ -16,6 +15,32 @@ Page({
 		get_phone_show: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
 		wxUserData: null,
+		swiperData: [
+			{
+				name: 'sdfsdf',
+				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
+				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
+			},
+			{
+				name: 'sdfsdf',
+				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
+				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
+			},
+			{
+				name: 'sdfsdf',
+				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
+				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
+			},
+		],
+		remindData: [
+			'用户：花里胡晒在一分钟前报名功',
+			'用户：花里胡晒在2分钟前报成功',
+			'用户：花里胡晒3一分钟名成功',
+			'用户：花里胡在一钟前报名成功',
+			'用户：花里胡晒5分钟前报名成功',
+		],
+		surplus: 35,
+		price: 0,
 	},
 	onLoad: function(options) {
 		let that = this
@@ -26,6 +51,9 @@ Page({
 		wx.getSetting({
 			success(res) {
 				if (res.authSetting['scope.userInfo']) {
+					that.setData({
+						canIUse: false,
+					})
 					// 已经授权，可以直接调用 getUserInfo 获取头像昵称
 					wx.getUserInfo({
 						success: function(res) {
@@ -36,22 +64,152 @@ Page({
 							app.globalData.userInfo = res.userInfo
 						},
 					})
+				} else {
+					that.setData({
+						canIUse: true,
+					})
 				}
 			},
 		})
+		that.loadPrice()
+		let time = new Date().getHours()
+		console.log(time)
+		switch (time) {
+			case 0:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 1:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 2:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 3:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 4:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 5:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 6:
+				this.setData({
+					surplus: 35,
+				})
+				break
+			case 7:
+				this.setData({
+					surplus: 34,
+				})
+				break
+			case 8:
+				this.setData({
+					surplus: 33,
+				})
+				break
+			case 9:
+				this.setData({
+					surplus: 32,
+				})
+				break
+			case 10:
+				this.setData({
+					surplus: 30,
+				})
+				break
+			case 11:
+				this.setData({
+					surplus: 25,
+				})
+				break
+			case 12:
+				this.setData({
+					surplus: 20,
+				})
+				break
+			case 13:
+				this.setData({
+					surplus: 17,
+				})
+				break
+			case 14:
+				this.setData({
+					surplus: 14,
+				})
+				break
+			case 15:
+				this.setData({
+					surplus: 11,
+				})
+				break
+			case 16:
+				this.setData({
+					surplus: 8,
+				})
+				break
+			case 17:
+				this.setData({
+					surplus: 6,
+				})
+				break
+			case 18:
+				this.setData({
+					surplus: 4,
+				})
+				break
+			case 19:
+				this.setData({
+					surplus: 3,
+				})
+				break
+			case 20:
+				this.setData({
+					surplus: 2,
+				})
+				break
+			default:
+				this.setData({
+					surplus: 1,
+				})
+				break
+		}
 	},
 	onReady: function() {},
 	onShow: function() {
 		console.log('onShow')
 	},
+	loadPrice() {
+		request('get', '/getPrice', {}, 1).then((res) => {
+			if (res.code == 0) {
+				app.globalData.price = res.result.price
+				this.setData({
+					price: res.result.price,
+				})
+			}
+		})
+	},
 	// 报名操作
 	sign_action() {
-		console.log(this.globalData.phone)
+		console.log(app.globalData.phone)
 		if (app.globalData.phone) {
 			if (this.data.isIos === 'IOS') {
 				this.iosPayAction()
 			} else {
-				this.toPay()
+				this.iosPayAction()
+				// this.toPay()
 			}
 		} else {
 			this.setData({
@@ -62,6 +220,56 @@ Page({
 	// ios端报名
 	iosPayAction() {
 		console.log('iosPay')
+		wx.request({
+			url:
+				'https://pbc.kaolakaola.cn/kkof/pay/createOrder/' +
+				app.globalData.userObj.id,
+			method: 'post',
+			data: {},
+			header: {
+				'content-type': 'application/json', // 默认值
+			},
+			success(res) {
+				console.log(res)
+				if (res.data.code === 0) {
+					let viewData = res.data.result
+					wx.requestPayment({
+						timeStamp: viewData.timeStamp.toString(),
+						nonceStr: viewData.nonceStr,
+						package: viewData.packageValue,
+						signType: 'MD5',
+						paySign: viewData.paySign,
+						success(res) {
+							wx.showToast({
+								title: '支付成功', //提示的内容,
+								icon: 'success', //图标,
+								duration: 2000, //延迟时间,
+								mask: true, //显示透明蒙层，防止触摸穿透,
+								success: (res) => {
+									wx.reLaunch({ url: '/pages/practiceIndex/practiceIndex' })
+								},
+							})
+						},
+						fail(res) {
+							console.log(res)
+							wx.showToast({
+								title: '支付失败', //提示的内容,
+								icon: 'success', //图标,
+								duration: 2000, //延迟时间,
+								mask: true, //显示透明蒙层，防止触摸穿透,
+							})
+						},
+					})
+				} else {
+					wx.showToast({
+						title: '生成订单失败', //提示的内容,
+						icon: 'fail', //图标,
+						duration: 2000, //延迟时间,
+						mask: true, //显示透明蒙层，防止触摸穿透,
+					})
+				}
+			},
+		})
 	},
 	// 安卓端直接购买
 	toPay() {
@@ -87,6 +295,7 @@ Page({
 				this.setData({
 					get_phone_show: false,
 				})
+				this.iosPayAction()
 			})
 		}
 	},

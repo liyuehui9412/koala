@@ -1,2 +1,15 @@
 <!--pages/practiceIndex/practiceIndex.wxml-->
-<text>pages/practiceIndex/practiceIndex.wxml</text>
+<nav
+	id="nav"
+	title="必过500题"
+	class="nav"
+	bar-class="barClass"
+	isShowBack="0"
+	nav-class="navClass"
+></nav>
+<view style="margin-top:{{ navMarginTop }}px">
+	<view>
+		
+	</view>
+	  
+</view>
