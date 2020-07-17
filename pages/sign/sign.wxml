@@ -56,13 +56,7 @@
 						<block wx:for="{{ swiperData }}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 							<swiper-item>
 								<view class="swiper-item">
-									<view class="head_url">
-										<image src="{{item.url}}"></image>
-									</view>
-									<view>
-										<view class="head_name">{{item.name}}</view>
-										<view class="head_content">{{item.content}}</view>
-									</view>
+									<image class="swiper-item-img" src="{{item}}"></image>
 								</view>
 							</swiper-item>
 						</block>

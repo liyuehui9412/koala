@@ -34,7 +34,7 @@ App({
 					that.globalData.platform = 'IOS'
 				}
 				that.globalData.systemInfo = res
-				that.globalData.marginTop = res.statusBarHeight + 44 
+				that.globalData.marginTop = res.statusBarHeight + 44
 				that.globalData.proportion = res.screenHeight / res.screenWidth
 				that.globalData.windowHeight = res.windowHeight
 			},
@@ -61,8 +61,11 @@ App({
 					url: '/pages/sign/sign',
 				})
 			} else {
+				// wx.reLaunch({
+				// 	url: '/pages/practiceIndex/practiceIndex',
+				// })
 				wx.reLaunch({
-					url: '/pages/practiceIndex/practiceIndex',
+					url: '/pages/examResult/examResult',
 				})
 			}
 		})

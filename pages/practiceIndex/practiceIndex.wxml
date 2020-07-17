@@ -8,7 +8,54 @@
 	nav-class="navClass"
 ></nav>
 <view style="margin-top:{{ navMarginTop }}px">
-	<view>
+	<view class="index_box">
+		<view class="index_head">
+			<view class="head_url">
+				<view class="user_head_url">
+					<image class="user_image" src="{{ headUrl }}"></image>
+				</view>
+				<view class="user_name">{{ userName }}</view>
+				<image
+					class="vip_logo"
+					src="https://static.kaolakaola.cn/tiku/index_vip_logo.png"
+				></image>
+			</view>
+		</view>
+		<view class="practice">
+			<view class="nav_box">
+				<view class="nav_item {{currentNav?'active':''}}" bindtap="clickOne">
+					科一题库
+				</view>
+				<view class="nav_item {{currentNav?'':'active'}}" bindtap="clickFour">
+					科四题库
+				</view>
+			</view>
+			<view class="topic">
+				<view class="topic_item topic_one">
+					<image class="topic_bg_img" src="https://static.kaolakaola.cn/tiku/index_practice.png"></image>
+					<view class="topic_position_box">
+						<view class="topic_title">
+							必做500题
+							<text class="topic_num num_color topic_margin_left">{{topicOneAnswerCount.already}}</text>
+							<text class="topic_num">/{{topicOneAnswerCount.all}}</text>
+						</view>
+						<view class="topic_des">精简题库 快速刷题 专家解析 秒懂技巧</view>
+						<view class="jump_btn" bindtap="jumpToPractice">去练习</view>
+					</view>
+				</view>
+				 <view class="topic_item topic_four">
+					<image class="topic_bg_img" src="https://static.kaolakaola.cn/tiku/index_test.png"></image>
+					<view class="topic_position_box">
+						<view class="topic_title">
+							全真模拟考
+							<text class="topic_num topic_margin_left">平均成绩：</text>
+							<text class="topic_num num_color">{{topicFourAchievement}}</text>
+						</view>
+						<view class="topic_des">真题精选 智能计算 直击考点 高效提分</view>
+						<view class="jump_btn test_color" bindtap="jumpToTest">去考试</view>
+					</view>
+				</view> 
+			</view>
+		</view>
 	</view>
-	  
 </view>

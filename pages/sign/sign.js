@@ -16,21 +16,9 @@ Page({
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
 		wxUserData: null,
 		swiperData: [
-			{
-				name: 'sdfsdf',
-				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
-				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
-			},
-			{
-				name: 'sdfsdf',
-				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
-				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
-			},
-			{
-				name: 'sdfsdf',
-				content: '文化无法人为狂热为了让和无人可五花肉认为好人温婉可人好',
-				url: 'https://static.kaolakaola.cn/tiku/achievement_icon.png',
-			},
+			'https://static.kaolakaola.cn/tiku/swiper1.png',
+			'https://static.kaolakaola.cn/tiku/swiper2.png',
+			'https://static.kaolakaola.cn/tiku/swiper3.png',
 		],
 		remindData: [
 			'用户：花里胡晒在一分钟前报名功',
@@ -208,8 +196,7 @@ Page({
 			if (this.data.isIos === 'IOS') {
 				this.iosPayAction()
 			} else {
-				this.iosPayAction()
-				// this.toPay()
+				this.toPay()
 			}
 		} else {
 			this.setData({
@@ -219,7 +206,22 @@ Page({
 	},
 	// ios端报名
 	iosPayAction() {
+		wx.setClipboardData({
+			data: 'zsj18515626092',
+			success(res) {
+				wx.showToast({
+					title: '客服微信号已复制成功，请添加微信客服', //提示的内容,
+					icon: 'none', //图标,
+					duration: 3000, //延迟时间,
+					mask: true, //显示透明蒙层，防止触摸穿透,
+				})
+			},
+		})
 		console.log('iosPay')
+	},
+	// 安卓端直接购买
+	toPay() {
+		console.log('andriodPay')
 		wx.request({
 			url:
 				'https://pbc.kaolakaola.cn/kkof/pay/createOrder/' +
@@ -271,10 +273,6 @@ Page({
 			},
 		})
 	},
-	// 安卓端直接购买
-	toPay() {
-		console.log('andriodPay')
-	},
 	// 获取手机号
 	getPhoneNumber(e) {
 		if (e.detail.iv) {
@@ -295,7 +293,7 @@ Page({
 				this.setData({
 					get_phone_show: false,
 				})
-				this.iosPayAction()
+				this.sign_action()
 			})
 		}
 	},
@@ -325,9 +323,13 @@ Page({
 				},
 				1,
 			).then((res) => {
-				this.setData({
-					get_phone_show: true,
-				})
+				if (!app.globalData.phone) {
+					this.setData({
+						get_phone_show: true,
+					})
+				} else {
+					this.sign_action()
+				}
 			})
 			app.globalData.userInfo = res.detail.userInfo
 		}
