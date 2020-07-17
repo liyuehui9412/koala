@@ -79,5 +79,6 @@ App({
 		sessionKey: null,
 		phone: null,
 		userObj: null, // 项目内用户信息
+		price: null, // 价格
 	},
 })

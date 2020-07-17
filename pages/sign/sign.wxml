@@ -9,35 +9,127 @@
 ></nav>
 <view style="margin-top:{{ navMarginTop }}px">
 	<view class="sign_page">
-		<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic1.png" lazy-load="true"></image>
+		<image
+			class="sign_page_image"
+			mode="widthFix"
+			src="https://static.kaolakaola.cn/tiku/sign_pic1.png"
+			lazy-load="true"
+		></image>
 		<view style="padding: 0 20rpx;">
-			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic2.png" lazy-load="true"></image>
-			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic3.png" lazy-load="true"></image>
-			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic4.png" lazy-load="true"></image>
-			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic5.png" lazy-load="true"></image>
+			<image
+				class="sign_page_image"
+				mode="widthFix"
+				src="https://static.kaolakaola.cn/tiku/sign_pic2.png"
+				lazy-load="true"
+			></image>
+			<image
+				class="sign_page_image"
+				mode="widthFix"
+				src="https://static.kaolakaola.cn/tiku/sign_pic3.png"
+				lazy-load="true"
+			></image>
+			<image
+				class="sign_page_image"
+				mode="widthFix"
+				src="https://static.kaolakaola.cn/tiku/sign_pic4.png"
+				lazy-load="true"
+			></image>
+			<image
+				class="sign_page_image"
+				mode="widthFix"
+				src="https://static.kaolakaola.cn/tiku/sign_pic5.png"
+				lazy-load="true"
+			></image>
 			<view class="swiper_box">
-				<image class="swiper_bg" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_big_swiper.png" lazy-load="true"></image>
+				<image
+					class="swiper_bg"
+					mode="widthFix"
+					src="https://static.kaolakaola.cn/tiku/sign_big_swiper.png"
+					lazy-load="true"
+				></image>
+				<view class="swiper">
+					<swiper
+						autoplay="true"
+						circular="true"
+						interval="8000"
+					>
+						<block wx:for="{{ swiperData }}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+							<swiper-item>
+								<view class="swiper-item">
+									<view class="head_url">
+										<image src="{{item.url}}"></image>
+									</view>
+									<view>
+										<view class="head_name">{{item.name}}</view>
+										<view class="head_content">{{item.content}}</view>
+									</view>
+								</view>
+							</swiper-item>
+						</block>
+					</swiper>
+				</view>
 			</view>
-			<image class="sign_page_image" mode="widthFix" src="https://static.kaolakaola.cn/tiku/sign_pic7.png" lazy-load="true"></image>
+			<image
+				class="sign_page_image"
+				mode="widthFix"
+				src="https://static.kaolakaola.cn/tiku/sign_pic7.png"
+				lazy-load="true"
+			></image>
+		</view>
+	</view>
+	<view class="sign_remind">
+		<view class="left_swper">
+			<swiper
+				autoplay="true"
+				circular="true"
+				interval="3000"
+				vertical="true"
+				style="height:48rpx;"
+			>
+				<block wx:for="{{ remindData }}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+					<swiper-item>
+						<view class="swiper-item">
+							<view class="remind_content">{{item}}</view>
+						</view>
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		<view class="surplus">
+			仅剩<text class="surplus_num">{{surplus}}</text>个名额
 		</view>
 	</view>
 	<view style="height:100rpx;"></view>
 	<view class="bottom_sign_btn">
 		<view>科一/科四必考500题 </view>
-		<view class="price">￥49</view>
+		<view class="price">￥{{price}}</view>
 		<image class="sign_btn_image" src="../../image/sign_btn.png"></image>
 		<view class="sign_btn_text" bindtap="sign_action">立即报名</view>
-		<button wx:if="{{canIUse}}" class="opcity_get_user_info" open-type="getUserInfo" bindgetuserinfo="get_user_info">授权登录</button>
+		<button
+			wx:if="{{ canIUse }}"
+			class="opcity_get_user_info"
+			open-type="getUserInfo"
+			bindgetuserinfo="get_user_info"
+		>
+			授权登录
+		</button>
 	</view>
-	<view class="get_phone_bg" bindtap="close_get_phone" wx:if="{{get_phone_show}}">
+	<view
+		class="get_phone_bg"
+		bindtap="close_get_phone"
+		wx:if="{{ get_phone_show }}"
+	>
 		<view class="get_phone_box" catchtap="show_get_phone">
 			<view class="get_phone_title">授权登录提醒</view>
 			<view class="get_phone_content">必做500题申请获得您的手机号登录</view>
 			<view class="get_phone_btn">
 				授权
-				<button class="opcity_btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+				<button
+					class="opcity_btn"
+					open-type="getPhoneNumber"
+					bindgetphonenumber="getPhoneNumber"
+				></button>
 			</view>
 		</view>
 	</view>
-	  
 </view>

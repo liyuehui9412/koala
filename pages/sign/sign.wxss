@@ -10,9 +10,82 @@
 
 
 .swiper_box {
+	width: 678rpx;
+	margin: 0 auto;
+	margin-bottom: 40rpx;
+	position: relative;
+}
+
+.swiper_bg {
 	width: 100%;
 }
 
+.swiper {
+	position: absolute;
+	width: 100%;
+	height: 360rpx;
+	bottom: 0;
+	padding: 80rpx 20rpx 20rpx 20rpx;
+	box-sizing: border-box;
+}
+
+.swiper-item {
+	display: flex;
+}
+
+.head_url {
+	width: 84rpx;
+	height: 84rpx;
+	margin-right: 12rpx;
+}
+
+.head_url image {
+	width: 84rpx;
+	height: 84rpx;
+	border-radius: 50%;
+}
+
+.head_name {
+	color: #DEB585;
+	font-size: 32rpx;
+	font-weight: bold;
+}
+
+.head_content {
+	font-size: 28rpx;
+	color: #666;
+	margin-top: 22rpx;
+}
+
+.sign_remind {
+	width: 100%;
+	height: 48rpx;
+	display: flex;
+	align-items: center;
+	background-image: url('https://static.kaolakaola.cn/tiku/sign_swiper.png');
+	margin-bottom: 40rpx;
+	padding: 0 38rpx;
+}
+
+.left_swper {
+	width: 440rpx;
+	height: 48rpx;
+	line-height: 48rpx;
+	font-size: 28rpx;
+	color: #4d4d4d;
+}
+
+.surplus {
+	margin: auto;
+	color: #4d4d4d;
+	font-size: 26rpx;
+}
+
+.surplus_num {
+	color: #EECC8E;
+	font-size: 34rpx;
+	font-weight: bold;
+}
 
 .bottom_sign_btn {
 	position: fixed;
@@ -28,7 +101,7 @@
 
 .price {
 	color:rgba(247,229,203,1);
-	font-weight: 500;
+	font-weight: bold;
 	font-size: 38rpx;
 	text-indent: 20rpx;
 }
@@ -52,7 +125,7 @@
 	color: #333;
 	line-height: 126rpx;
 	text-indent: 88rpx;
-	font-weight: 500;
+	font-weight: bold;
 }
 
 .opcity_get_user_info {
@@ -87,7 +160,7 @@
 
 .get_phone_title {
 	font-size: 36rpx;
-	font-weight: 500;
+	font-weight: bold;
 	color: #3c3c3c;
 	margin-top: 40rpx;
 }
