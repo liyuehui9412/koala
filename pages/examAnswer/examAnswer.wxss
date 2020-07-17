@@ -231,11 +231,28 @@ swiper-item{
 .bottom-right-img{
   height: 44rpx;
   width: 44rpx;
-  margin-right: 8rpx;
+  margin:0 8rpx 0 48rpx;
 }
 .bottom-right-num{
   font-weight:600;
   color:#333;
+}
+.bottom-submit{
+  width:104rpx;
+  height:52rpx;
+  border-radius:26rpx;
+  border:2rpx solid rgba(0,188,150,1);
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,188,150,1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 32rpx;
+}
+.bottom-submit-hover{
+  background: #f8f8f8;
 }
 .answer-pop{
   position: fixed;
@@ -309,6 +326,9 @@ swiper-item{
   line-height:34rpx;
   margin-top: 16rpx;
 }
+.text_num_error{
+  color: #FF6363;
+}
 .pop-hint{
   width: 100%;
   text-align: center;
@@ -319,6 +339,9 @@ swiper-item{
   color:rgba(102,102,102,1);
   line-height:40rpx;
   margin: 32rpx 0 40rpx 0;
+}
+.pop-hint-num{
+  color:rgba(0,188,150,1);
 }
 .pop-btn{
   width: 500rpx;

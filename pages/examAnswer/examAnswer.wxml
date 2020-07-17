@@ -93,28 +93,34 @@
       <view class="left-error">
         <image class="left-right-img" src="/image/error.png"></image>{{errorCount}}
       </view>
+      <view class="bottom-right">
+        <image class="bottom-right-img" src="/image/topic.png"></image><text class="bottom-right-num">{{ itemCount }}</text>/{{totalCount}}
+      </view>
     </view>
-    <view class="bottom-right">
-      <image class="bottom-right-img" src="/image/topic.png"></image><text class="bottom-right-num">{{ itemCount }}</text>/{{totalCount}}
-    </view>
+    <view class="bottom-submit" hover-class="bottom-submit-hover" bindtap="uploadPaper">交卷</view>
   </view>
 
   <view class="answer-pop" hidden='{{!isQuit}}'>
     <view class="pop-content">
-      <view class="pop-title">退出考试</view>
+      <view class="pop-title">{{modalTitle}}</view>
 
       <view class='progress_box'>
         <canvas class="progress_bg" canvas-id="canvasProgressbg">  </canvas>
         <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
         <view class="progress_text">
-          <view class="text_title">剩余未做</view>
-          <view class="text_num">{{totalCount - (rightCount + errorCount)}}题</view>
-        </view>  
+          <view class="text_title">{{modalHint}}</view>
+          <view class="text_num" wx:if="{{modalStatus == 0 || modalStatus == 2 }}">{{totalCount - (rightCount + errorCount)}}题</view>
+          <view class="text_num text_num_error" wx:if="{{modalStatus == 1}}">{{errorCount}}题</view>
+        </view>
       </view>
-      <view class="pop-hint">您确定要退出本次答题吗？</view>
+      <view class="pop-hint" wx:if="{{modalStatus == 0 || modalStatus == 2}}">您还有 <text class="pop-hint-num">{{totalCount - (rightCount + errorCount)}}</text> 题未做</view>
+      <view class="pop-hint" wx:elif="{{modalStatus == 1}}">未作答{{totalCount - (rightCount + errorCount)}}题 当前考试得分{{score}}分</view>
+      <view class="pop-hint" wx:elif="{{modalStatus == 3}}">本次考试已超时，考试合格</view>
+      <view class="pop-hint" wx:elif="{{modalStatus == 4}}">本次考试已超时，考试不合格</view>
       <view class="pop-btn">
-        <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="quit">退出</button>
-        <button class="btn_back" hover-class="btn_back_hover" bindtap="goOn">继续答题</button>
+        <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="quit" wx:if="{{modalStatus == 0}}">{{modalBtnLeft}}</button>
+        <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="paper" wx:else>{{modalBtnLeft}}</button>
+        <button class="btn_back" hover-class="btn_back_hover" bindtap="goOn">{{modalBtnRight}}</button>
       </view>
     </view>
   </view>

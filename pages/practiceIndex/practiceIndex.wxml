@@ -9,7 +9,6 @@
 ></nav>
 <view style="margin-top:{{ navMarginTop }}px">
 	<view>
-		
 	</view>
 	  
 </view>

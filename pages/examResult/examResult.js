@@ -17,6 +17,7 @@ Page({
 
   },
   onLoad: function (options) {
+    console.log('options',options)
     let that = this;
     that.setData({
       navMarginTop: app.globalData.marginTop,

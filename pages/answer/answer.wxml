@@ -1,5 +1,5 @@
 <!--pages/answer/answer.wxml-->
-<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass' bind:backfun='backFun' isBack='1'></nav>
+<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass' bind:backfun='backFun' isBack='2'></nav>
 <view class='answer' style='margin-top:{{navMarginTop}}px; height:{{statusBarHeight}}px'>
   <view class="answer-content">
       <swiper class="answer-swiper" bindchange='swiperChange' duration="{{150}}" current="{{current}}">
@@ -101,7 +101,7 @@
 
   <view class="answer-pop" hidden='{{!isQuit}}'>
     <view class="pop-content">
-      <view class="pop-title">退出考试</view>
+      <view class="pop-title">退出练习</view>
 
       <view class='progress_box'>
         <canvas class="progress_bg" canvas-id="canvasProgressbg">  </canvas>

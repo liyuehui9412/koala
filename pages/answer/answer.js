@@ -5,7 +5,8 @@ import Config from '../../utils/config.js';
 
 let app = getApp();
 let context = null;
-let ctx = null
+let ctx = null;
+let titleFun = null;
 
 Page({
   data: {
@@ -23,13 +24,17 @@ Page({
     itemCount:1,
     rightCount:0,
     errorCount:0,
+    subject:1 ,  //1/4
+    time:0
   },
   onLoad (options) {
     let that = this;
     let screenHeight = app.globalData.systemInfo.screenHeight;
     let marginTop = app.globalData.marginTop;
-
+    let time = that.data.time;
     that.setData({
+      time:0,
+      subject: options.type,
       navMarginTop: marginTop,
       statusBarHeight: screenHeight - marginTop
     })
@@ -39,7 +44,22 @@ Page({
       })
     }
 
+    clearInterval(titleFun);
+    titleFun = setInterval(function(){
+      time++;
+      that.setData({
+        time:time
+      })
+    },1000)
+
+
   },
+  onHide(){
+    clearInterval(titleFun);
+  }, 
+  onUnload(){
+    clearInterval(titleFun);
+  }, 
   onReady () {
     this.drawProgressbg();
      // this.drawCircle(1)
@@ -60,6 +80,12 @@ Page({
     this.getTopic()
     
   },
+  onHide(){
+    clearInterval(titleFun);
+  }, 
+  onUnload(){
+    clearInterval(titleFun);
+  }, 
     // 绘制底层浅色圆
     drawProgressbg(){
       // 使用 wx.createContext 获取绘图上下文 context
@@ -142,9 +168,9 @@ Page({
       }
       let url = `/getSubjectOne/${app.globalData.userObj.id}`
       // 判断科目一还是科目四
-      // if(1){
-      //   url = `/getSubjectFour/${app.globalData.userObj.id}`
-      // }
+      if(that.data.subject == 4){
+        url = `/getSubjectFour/${app.globalData.userObj.id}`
+      }
 
       request('POST', url , params, 1)
       .then(res=>{
@@ -187,9 +213,6 @@ Page({
             },
           ]
           list[i].choose = false;
-          if( i % 2 == 0){
-            list[i].type = '多选';
-          }
           list[i].answerArray = obj; 
         }
 
@@ -364,9 +387,9 @@ Page({
       let url = '/answerSubjectOne'
 
       // 判断是科目一还是科目四
-      // if(1){
-      //   url = '/answerSubjectFour'
-      // }
+      if(this.data.subject == 4){
+        url = '/answerSubjectFour'
+      }
 
       request('POST', url , params, 1)
       .then(res=>{
@@ -400,9 +423,20 @@ Page({
     },
     // 点击退出
     quit(){
-      wx.navigateBack({
-        delta: 1,
+      let titleSecond = this.data.time;
+      let errorCount = parseInt(this.data.errorCount) ; 
+      let rightCount = parseInt(this.data.rightCount);
+      let subject = this.data.subject;
+
+      let minute = parseInt(titleSecond / 60);
+      let second = parseInt(titleSecond % 60);
+      let testTime = Util.formatNumber(minute) +':'+ Util.formatNumber(second);
+
+      wx.redirectTo({
+        url: '/pages/result/result?practiceTime='+testTime+'&wrongNum='+ errorCount  +'&practiceNum='+ (errorCount +rightCount) +'&type='+subject,
       })
+
+
     }
 
 })

@@ -25,7 +25,7 @@ Page({
   },
   start(){
     wx.navigateTo({
-      url: '/pages/examAnswer/examAnswer',
+      url: '/pages/answer/answer?type=1',
     })
   }
   

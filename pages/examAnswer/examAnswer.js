@@ -18,21 +18,32 @@ Page({
     count: 0,  // 设置 计数器 初始为0 控制绘制圆
     countTimer: null, // 设置 定时器 初始为null
     isQuit:false,
-    pages:1,
     current:0,
     totalCount:0,
     itemCount:1,
     rightCount:0,
     errorCount:0,
     title:'60:00',
-    titleSecond: 3600
+    titleSecond: 3600,
+
+    modalTitle:'退出考试',
+    modalHint:'剩余未做',
+    modalStatus: 0 , // 0 退出考试/交卷， 1 考试不合格，2 交卷， 3 超时合格， 4 超时不合格
+    modalBtnLeft:'退出',
+    modalBtnRight:'继续答题',
+
+    score:0,
+    subject:1   //1/4
+
   },
   onLoad (options) {
+    console.log('options',options)
     let that = this;
     let screenHeight = app.globalData.systemInfo.screenHeight;
     let marginTop = app.globalData.marginTop;
-
+    
     that.setData({
+      subject: options.type,
       navMarginTop: marginTop,
       statusBarHeight: screenHeight - marginTop
     })
@@ -49,8 +60,11 @@ Page({
       titleSecond--;
       if(titleSecond <= 0){
         // 倒计时结束
-
+        that.setData({
+          titleSecond: 0
+        })
         clearInterval(titleFun)
+        that.answerFun()
         return
       }
       let minute = parseInt(titleSecond / 60);
@@ -65,7 +79,7 @@ Page({
 
   },
   onReady () {
-    this.drawProgressbg();
+    // this.drawProgressbg();
      // this.drawCircle(1)
   },
   onShow () {
@@ -73,31 +87,43 @@ Page({
 
     this.setData({
       question:[],
-      pages:1,
       current:0,
       totalCount:0,
       itemCount:1,
       rightCount:0,
       errorCount:0,
     })
-
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getTopic()
     
   },
+  onHide(){
+    clearInterval(titleFun);
+  }, 
+  onUnload(){
+    clearInterval(titleFun);
+  }, 
     // 绘制底层浅色圆
     drawProgressbg(){
+      let modalStatus = this.data.modalStatus
       // 使用 wx.createContext 获取绘图上下文 context
       ctx = wx.createCanvasContext('canvasProgressbg');
-      // ctx.clearRect()
+      ctx.clearRect(0, 0, 200, 200)
       ctx.save()
       let out_r = 42 ; //圆半径
       let x = 50 ; //圆心 x坐标
       let y = 50 ; //圆心 y坐标
       let lineWidth = 8 ; // 圆的宽度
-      let bgc = '#C4F2E9'; // 圆的背景色
-  
+    
       ctx.setLineWidth( lineWidth ); // 设置圆环的宽度
-      ctx.setStrokeStyle( bgc ); // 设置圆环的颜色
+      if(modalStatus == 1 || modalStatus == 4){
+        ctx.setStrokeStyle( '#FBEBEE' ); // 设置圆环的颜色
+      }else{
+        ctx.setStrokeStyle( '#C4F2E9' ); // 设置圆环的颜色
+      }
+
       ctx.setLineCap('round'); // 设置圆环端点的形状
       ctx.beginPath(); // 开始一个新的路径
       ctx.arc(x, y, out_r, 0, 2 * Math.PI, false);
@@ -108,6 +134,7 @@ Page({
     },
     // 绘制上层
     drawCircle (step, i){  
+      let modalStatus = this.data.modalStatus
        context = wx.createCanvasContext('canvasProgress');
       context.clearRect(0, 0, 200, 200)
       context.save()
@@ -117,10 +144,18 @@ Page({
       let lineWidth = 8 ; // 圆的宽度
       // 设置渐变
       var gradient = context.createLinearGradient(0, 0, 0, 200);
-      gradient.addColorStop("0", "#2BE1BC");
-      gradient.addColorStop("0.4", "#2BE1BC");
-      gradient.addColorStop("0.8", "#00BC96");
-      gradient.addColorStop("1.0", "#00BC96");
+      if(modalStatus == 1 || modalStatus == 4){
+        gradient.addColorStop("0", "#FF6A6E");
+        gradient.addColorStop("0.4", "#FF6A6E");
+        gradient.addColorStop("0.8", "#FF9391");
+        gradient.addColorStop("1.0", "#FF9391");
+      }else{ 
+        gradient.addColorStop("0", "#2BE1BC");
+        gradient.addColorStop("0.4", "#2BE1BC");
+        gradient.addColorStop("0.8", "#00BC96");
+        gradient.addColorStop("1.0", "#00BC96"); 
+      }
+
       context.setStrokeStyle(gradient);
       context.setLineWidth( lineWidth );
       context.setLineCap('round')
@@ -135,17 +170,20 @@ Page({
   //    定时器绘制
     countInterval ( num ) {
       // 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
-  
+      let that = this
+      that.setData({
+        count:0
+      })
       this.countTimer = setInterval(() => {
-        if (this.data.count <= num) {
+        if (that.data.count <= num) {
           /* 绘制彩色圆环进度条  
           注意此处 传参 step 取值范围是0到2，
           所以 计数器 最大值 60 对应 2 做处理，计数器count=60的时候step=2 */
-          this.drawCircle(this.data.count / (30/2) );
-          this.data.count++;
+          that.drawCircle(that.data.count / (30/2) );
+          that.data.count++;
         } else {
-          clearInterval(this.countTimer);
-          this.setData({
+          clearInterval(that.countTimer);
+          that.setData({
             count:0
           })
         }
@@ -155,26 +193,20 @@ Page({
     // 获取题目
     getTopic(){
       let that = this;
-      let pages = parseInt(that.data.pages) ;
       let question = that.data.question ;
       let answerArray = that.data.answerArray;
       console.log('question',question)
-      // question.splice(0,5)
-      let params={
-        "limit":"10",
-        "page": pages + ''
-      }
-      let url = `/examinationOne/${app.globalData.userObj.id}`
-      // 判断科目一还是科目四
-      // if(1){
-      //   url = `/examinationFour/${app.globalData.userObj.id}`
-      // }
 
-      request('POST', url , params, 1)
+      let url = `/examinationOne`
+      // 判断科目一还是科目四
+      if(that.data.subject == 4){
+        url = `/examinationFour`
+      }
+
+      request('GET', url , {}, 1)
       .then(res=>{
         console.log('res',res)
-        let list = res.result.list ;
-        pages++;
+        let list = res.result.ksList ;
 
         for(let i=0; i<list.length; i++){
           let index = list[i].answer.indexOf('')
@@ -211,18 +243,19 @@ Page({
             },
           ]
           list[i].choose = false;
-          if( i % 2 == 0){
-            list[i].type = '多选';
-          }
+  
           list[i].answerArray = obj; 
         }
 
         let concatArray = question.concat(list)
+        
+        setTimeout(function(){
+          wx.hideLoading()
+        },1500)
 
         that.setData({
           question: concatArray,
-          totalCount: res.result.totalCount,
-          pages:pages,
+          totalCount: list.length,
         })
       })
     },
@@ -230,16 +263,12 @@ Page({
     swiperChange(e){
       console.log(e)
       let index = e.detail.current;
-      let pages = parseInt(this.data.pages) ;
-      // console.log(index)
-      // console.log( ( pages - 2 ) * 10 + 5)
+
       this.setData({
         itemCount: index+1,
         current: index
       })
-      if( index >= ((pages - 2 )*10 + 5) ){
-        this.getTopic()
-      }
+
     },
     // 选择答案
     selectAnswer(e){
@@ -284,6 +313,7 @@ Page({
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
       let id = e.currentTarget.dataset.id;
+      let score = that.data.score;
       let answerStr = '';
 
       let isChoose = false;
@@ -313,14 +343,15 @@ Page({
           }
         }
       }
-      let params = {
-        userId: app.globalData.userObj.id,
-        titleId: id
-      }
+
       console.log('answerStr',answerStr)
       if(answerStr == question[current].answer){
         rightCount++;
-        params.isWrong = 0
+        if(that.data.subject == 1){
+          score += 1
+        }else{
+          score += 2
+        }
         setTimeout(function(){
           that.setData({
             current: current+1
@@ -329,21 +360,22 @@ Page({
 
       }else{
         errorCount++;
-        params.isWrong = 1
       }
 
       this.setData({
         question:question,
         rightCount:rightCount,
-        errorCount:errorCount
+        errorCount:errorCount,
+        score:score
       })
-      console.log('params',params)
-      this.answerFun( params )
+
+      this.answerFun( )
 
     },
     // 单选 / 判断
     radioAnswer(id,answer,index,question,current,rightCount,errorCount){
       let that = this;
+      let score = that.data.score;
       if( question[current].choose ){
           return;
       }
@@ -356,13 +388,15 @@ Page({
         }
       }
 
-      let params = {
-        userId: app.globalData.userObj.id,
-        titleId: id
-      }
       if(answer == question[current].answer){
         rightCount++;
-        params.isWrong = 0
+
+        if(that.data.subject == 1){
+          score += 1
+        }else{
+          score += 2
+        }
+
         setTimeout(function(){
           that.setData({
             current: current+1
@@ -371,48 +405,128 @@ Page({
 
       }else{
         errorCount++;
-        params.isWrong = 1
+
       }
 
       this.setData({
         question:question,
         rightCount:rightCount,
-        errorCount:errorCount
+        errorCount:errorCount,
+        score:score
       })
 
-      this.answerFun( params )
+      this.answerFun( )
     },
-    // 答题
-    answerFun(params){
-      console.log('params',params)
-      let url = '/answerSubjectOne'
+    // 判断是否结束考试
+    answerFun(){
+      
+      let totalCount = this.data.totalCount;
+      let rightCount = this.data.rightCount;
+      let errorCount = this.data.errorCount;
+      let score = this.data.score;
+      let subject = this.data.subject;
+      let titleSecond = this.data.titleSecond;
 
-      // 判断是科目一还是科目四
-      // if(1){
-      //   url = '/answerSubjectFour'
-      // }
+      let num = 30;
+      num = (rightCount + errorCount)/totalCount * 30;
 
-      request('POST', url , params, 1)
-      .then(res=>{
-        console.log('res',res)
+      if(subject == 1 && errorCount > 10){
+        // 科目一错10题
+          this.setData({
+            modalTitle:'考试不合格',
+            modalHint:'您已答错',
+            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalBtnLeft:'退出',
+            modalBtnRight:'继续答题',
+            isQuit:true
+          })
+          this.drawProgressbg();
+          this.countInterval( num );
+      }else if(subject == 4 && errorCount > 5){
+        // 科目四错5题
+          this.setData({
+            modalTitle:'考试不合格',
+            modalHint:'您已答错',
+            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalBtnLeft:'退出',
+            modalBtnRight:'继续答题',
+            isQuit:true
+          })
+          this.drawProgressbg();
+          this.countInterval( num );
+      }
+      // 时间到
+      if(titleSecond <= 0){
+        // 合格
+        if(score >= 90){
+          this.setData({
+            modalTitle:'考试合格',
+            modalHint:'您已超时',
+            modalStatus: 3 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalBtnLeft:'现在交卷',
+            modalBtnRight:'取消',
+            isQuit:true
+          })
+          this.drawProgressbg();
+          this.countInterval( num );
+        }else{
+          this.setData({
+            modalTitle:'考试不合格',
+            modalHint:'您已超时',
+            modalStatus: 4 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalBtnLeft:'现在交卷',
+            modalBtnRight:'取消',
+            isQuit:true
+          })
+          this.drawProgressbg();
+          this.countInterval( num );
+        }
+      }
+
+    },
+    // 右下角交卷
+    uploadPaper(){
+
+      let num = 30;
+      let totalCount = this.data.totalCount;
+      let rightCount = this.data.rightCount;
+      let errorCount = this.data.errorCount;
+  
+      num = (rightCount + errorCount)/totalCount * 30;
+
+      this.setData({
+        modalTitle:'交卷',
+        modalHint:'剩余未做',
+        modalStatus: 2 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+        modalBtnLeft:'现在交卷',
+        modalBtnRight:'取消',
+        isQuit:true
       })
-
+      this.drawProgressbg();
+      this.countInterval( num );
 
     },
     // 左上角返回函数
-    backFun: function (e) {
+    backFun (e) {
       console.log('backfun11111111')
      
       let num = 30;
       let totalCount = this.data.totalCount;
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
-      num = (rightCount+errorCount)/totalCount;
+  
+      num = (rightCount + errorCount)/totalCount * 30;
 
       this.setData({
+        modalTitle:'退出考试',
+        modalHint:'剩余未做',
+        modalStatus: 0 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+        modalBtnLeft:'退出',
+        modalBtnRight:'继续答题',
         isQuit:true
       })
-      
+      console.log('num',num)
+      this.drawProgressbg();
       this.countInterval( num );
 
     },
@@ -427,6 +541,45 @@ Page({
       wx.navigateBack({
         delta: 1,
       })
-    }
+    },
+    // 点击交卷
+    paper(){
+      let score = this.data.score;
+      let subject = this.data.subject;
+      let titleSecond = 3600 - this.data.titleSecond;
+      let params = {
+        userId: app.globalData.userObj.id,
+        "achievement": score,
+        "type": subject
+      }
+      wx.showLoading({
+        title: '正在提交',
+      })
+      clearInterval(titleFun);
+      let minute = parseInt(titleSecond / 60);
+      let second = parseInt(titleSecond % 60);
+      let testTime = Util.formatNumber(minute) +':'+ Util.formatNumber(second);
+
+      console.log('params',params)
+      request('POST', `/submitAchievement` , params, 1)
+      .then(res=>{
+        console.log('paper',res)
+        wx.hideLoading()
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        })
+        setTimeout(function(){
+          wx.redirectTo({
+            url: '/pages/examResult/examResult?achievement='+score+'&testTime='+ testTime +'&highestScore='+ res.top +'&type='+subject,
+          })
+        },1200)
+   
+      })
+
+
+    },
+
 
 })

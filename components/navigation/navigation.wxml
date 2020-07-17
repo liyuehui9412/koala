@@ -7,6 +7,7 @@
     </view>
   
     <view class='nav-title nav-class' wx:if="{{isBack == 0}}">{{title}}</view>
+    <view class='nav-title nav-class' wx:if="{{isBack == 2}}">{{title}}</view>
     <view class='nav-title nav-class' wx:if="{{isBack == 1}}">
       <image class="nav-time-img" src="/image/time.png"></image>
       <view class="nav-time">{{title}}</view>
