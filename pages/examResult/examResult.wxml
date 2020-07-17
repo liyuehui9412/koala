@@ -11,18 +11,18 @@
       <canvas class="progress_bg" canvas-id="canvasProgressbg">  </canvas>
       <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
       <view class="progress_text {{isPass ? '':'progress_text_fail'}}">
-        <view class="text_title {{isPass ? '':'text_title_fail'}}">考试通过</view>
-        <view class="text_num {{isPass ? '':'text_num_fail'}}">68</view>
-        <view class="text_hint {{isPass ? '':'text_hint_fail'}}">合格</view>
+        <view class="text_title {{isPass ? '':'text_title_fail'}}">{{isPass?'考试通过':'马路杀手'}}</view>
+        <view class="text_num {{isPass ? '':'text_num_fail'}}">{{achievement}}</view>
+        <view class="text_hint {{isPass ? '':'text_hint_fail'}}">{{isPass?'':'不'}}合格</view>
       </view>  
     </view>
     <view class="header_info">
       <view class="info_item">
-        <view class="info_item_num">13:41</view>
+        <view class="info_item_num">{{testTime}}</view>
         <view class="info_item_title">考试用时</view>
       </view>
       <view class="info_item">
-        <view class="info_item_num">13</view>
+        <view class="info_item_num">{{highestScore}}</view>
         <view class="info_item_title">最佳成绩</view>
       </view>
     </view>
@@ -35,8 +35,8 @@
         <view class="content_hint">加深印象，乘胜追击！</view>
       </view>
     </view>
-    <button class="again_btn" hover-class="again_btn_hover"  wx:if="{{isPass}}">在考一次</button>
-    <button class="again_btn {{isPass ? '':'again_btn_fail'}}" hover-class="again_btn_hover {{isPass ? '':'again_btn_hover_fail'}}" wx:else>重新考试</button>
+    <button class="again_btn" hover-class="again_btn_hover"  wx:if="{{isPass}}" bindtap="reTest">在考一次</button>
+    <button class="again_btn {{isPass ? '':'again_btn_fail'}}" hover-class="again_btn_hover {{isPass ? '':'again_btn_hover_fail'}}" wx:else bindtap="reTest">重新考试</button>
   </view>
 
 

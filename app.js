@@ -61,12 +61,12 @@ App({
 					url: '/pages/sign/sign',
 				})
 			} else {
-				// wx.reLaunch({
-				// 	url: '/pages/practiceIndex/practiceIndex',
-				// })
 				wx.reLaunch({
-					url: '/pages/examResult/examResult',
+					url: '/pages/practiceIndex/practiceIndex',
 				})
+				// wx.reLaunch({
+				// 	url: '/pages/examResult/examResult',
+				// })
 			}
 		})
 	},

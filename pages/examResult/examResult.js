@@ -12,19 +12,27 @@ Page({
 		count: 0, // 设置 计数器 初始为0
 		countTimer: null, // 设置 定时器 初始为null
 		gridNum: 60, //内层圆点数
-
 		isPass: true,
+		type: '',
+		achievement: '', // 成绩
+		testTime: '',
+		highestScore: '',
 	},
 	onLoad: function(options) {
 		let that = this
 		that.setData({
 			navMarginTop: app.globalData.marginTop,
+			type: options.type,
+			achievement: options.achievement,
+			testTime: options.testTime,
+			highestScore: options.highestScore,
+			isPass: options.achievement >= 90 ? true : false,
 		})
+		this.countInterval(options.achievement)
 	},
 	onReady: function() {
 		this.drawProgressbg()
 		// this.drawCircle(1)
-		this.countInterval()
 	},
 	onShow: function() {},
 	// 绘制底层浅色圆
@@ -57,7 +65,16 @@ Page({
 		}
 		ctx.stroke()
 		ctx.save()
-  },
+		// 外层底圈圆
+		ctx.setLineWidth(lineWidth) // 设置圆环的宽度
+		ctx.setStrokeStyle(bgc) // 设置圆环的颜色
+		ctx.setLineCap('round') // 设置圆环端点的形状
+		ctx.beginPath() // 开始一个新的路径
+		ctx.arc(x, y, out_r, 0, 2 * Math.PI, false)
+		// 设置一个原点(100,100)，半径为90的圆的路径到当前路径
+		ctx.stroke() // 对当前路径进行描边
+		ctx.draw()
+	},
 	// 绘制上层
 	drawCircle: function(step, i) {
 		var context = wx.createCanvasContext('canvasProgress')
@@ -104,11 +121,12 @@ Page({
 		context.draw()
 	},
 	//    定时器绘制
-	countInterval: function() {
+	countInterval: function(achievement) {
+		achievement = achievement * 0.3
 		// 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
 
 		this.countTimer = setInterval(() => {
-			if (this.data.count <= 30) {
+			if (this.data.count <= achievement) {
 				console.log('count', this.data.count)
 				/* 绘制彩色圆环进度条  
         注意此处 传参 step 取值范围是0到2，
@@ -120,5 +138,12 @@ Page({
 				clearInterval(this.countTimer)
 			}
 		}, 30)
+	},
+	// 再考一次
+	reTest() {
+		let that = this
+		wx.navigateTo({
+			url: `/pages/examAnswer/examAnswer?type=${that.data.type}`,
+		})
 	},
 })

@@ -151,8 +151,8 @@ Page({
 	jumpToTest() {
 		let that = this
 		wx.navigateTo({
-			url: `/pages/examAnswer/examAnswer/?type=${
-				that.data.currentNav ? 4 : 1
+			url: `/pages/examAnswer/examAnswer?type=${
+				that.data.currentNav ? 1 : 4
 			}`,
 		})
 	},

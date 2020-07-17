@@ -9,20 +9,20 @@
       <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
       <view class="progress_text">
         <view class="text_title">正确率</view>
-        <view class="text_num">68%</view>
+        <view class="text_num">{{percentage}}%</view>
       </view>  
     </view>
     <view class="header_info">
       <view class="info_item">
-        <view class="info_item_num">13:41</view>
+        <view class="info_item_num">{{practiceTime}}</view>
         <view class="info_item_title">练题时长</view>
       </view>
       <view class="info_item">
-        <view class="info_item_num">13</view>
+        <view class="info_item_num">{{wrongNum}}</view>
         <view class="info_item_title">错题数</view>
       </view>
       <view class="info_item">
-        <view class="info_item_num">13:41</view>
+        <view class="info_item_num">{{practiceNum}}</view>
         <view class="info_item_title">本次答题</view>
       </view>
     </view>
@@ -30,11 +30,11 @@
   <view class="result_detail">
     <view class="detail_info">
       <view class="detail_info_title">累计答题</view>
-      <view class="detail_info_num">99</view>
+      <view class="detail_info_num">{{fourPracticeAnswerCount.already}}</view>
       <view class="detail_info_word">题</view>
     </view>
     <view class="detail_surplus">
-      剩余未做1202题
+      剩余未做{{fourPracticeAnswerCount.all}}题
     </view>
   </view>
   <view class="result_line">
@@ -42,7 +42,7 @@
     <view class="result_line_hint"><text class="hint_trigon"></text> 10%</view>
   </view>
   <view>
-    <view class="result_sum">本次共答错<text class="sum_num">12</text>题</view>
+    <view class="result_sum">本次共答错<text class="sum_num">{{wrongNum}}</text>题</view>
     <view class="result_hint">现在回顾，错题记得更牢固</view>
     <view class="result_btn">
       <button class="btn_back" hover-class="btn_back_hover">错题回顾</button>
