@@ -26,4 +26,16 @@
   color: #333;
   font-family:PingFangSC-Semibold,PingFang SC;
   background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-time-img{
+  height: 48rpx;
+  width: 48rpx;
+  margin-right: 4rpx;
+}
+.nav-time{
+  width: 100rpx;
+  text-align: center;
 }

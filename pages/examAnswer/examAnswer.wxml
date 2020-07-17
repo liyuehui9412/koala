@@ -1,5 +1,5 @@
 <!--pages/answer/answer.wxml-->
-<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass' bind:backfun='backFun' isBack='1'></nav>
+<nav id='nav' title='{{title}}' class='nav' bar-class="barClass" isShowBack='1' nav-class='navClass' bind:backfun='backFun' isBack='1'></nav>
 <view class='answer' style='margin-top:{{navMarginTop}}px; height:{{statusBarHeight}}px'>
   <view class="answer-content">
       <swiper class="answer-swiper" bindchange='swiperChange' duration="{{150}}" current="{{current}}">

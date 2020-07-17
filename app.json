@@ -2,12 +2,13 @@
   "pages": [
 
     "pages/index/index",
+    "pages/home/home",
     "pages/answer/answer",
+    "pages/examAnswer/examAnswer",
     "pages/examResult/examResult",
     "pages/result/result",
 
     "pages/sign/sign",
-    "pages/home/home",
     "pages/practiceIndex/practiceIndex"
 
   ],

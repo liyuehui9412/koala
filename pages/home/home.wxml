@@ -1,6 +1,7 @@
 <!--pages/search/search.wxml--> 
 <!-- isShowBack == '1' 的时候，展示后退按钮 -->
-<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='0' nav-class='navClass'></nav>
+<nav id='nav' title='必过500题' class='nav' bar-class="barClass" isShowBack='0' nav-class='navClass' ></nav>
 <view class='search' style='margin-top:{{navMarginTop}}px'>
 home
+<button bindtap="start">开始练习</button>
 </view>

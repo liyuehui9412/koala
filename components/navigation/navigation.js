@@ -13,7 +13,12 @@ Component({
     title: {
       type: String,
       value: '',
+    },
+    isBack: {
+      type: String,
+      value: '0',
     }
+
   },
   /**
    * 组件的初始数据
@@ -35,9 +40,17 @@ Component({
    */
   methods: {
     _navToBack: function () {
-      wx.navigateBack({
-        delta: 1,
-      })
+
+      if(this.data.isBack == '0'){
+        wx.navigateBack({
+          delta: 1,
+        })
+      }else{
+        this.triggerEvent('backfun')
+      }
     }
   }
+
+
+
 })

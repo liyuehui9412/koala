@@ -22,6 +22,11 @@ Page({
   },
   onShow: function () {
 
+  },
+  start(){
+    wx.navigateTo({
+      url: '/pages/examAnswer/examAnswer',
+    })
   }
   
 })

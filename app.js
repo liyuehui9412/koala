@@ -49,9 +49,6 @@ App({
 		request('get', `/${this.globalData.openId}`, {}, 1).then((res) => {
 			console.log(res)
 			this.globalData.userObj = res.result.user
-			wx.reLaunch({
-				url: '/pages/sign/sign',
-			})
 			if (res.result.flag === 0) {
 				wx.reLaunch({
 					url: '/pages/sign/sign',

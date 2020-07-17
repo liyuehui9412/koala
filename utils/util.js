@@ -76,6 +76,7 @@ const doubleClick = () => {
 };
 
 module.exports = {
+  formatNumber:formatNumber,
   formatTime: formatTime,
   getIHValue: getIHValue,
   setStorage: setStorage,

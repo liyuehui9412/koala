@@ -5,6 +5,11 @@
     <view class='nav-img' wx:if="{{isShowBack == '1'}}" catchtap='_navToBack'>
       <image class='img' src='/image/back.png'></image>
     </view>
-    <view class='nav-title nav-class'>{{title}}</view>
+  
+    <view class='nav-title nav-class' wx:if="{{isBack == 0}}">{{title}}</view>
+    <view class='nav-title nav-class' wx:if="{{isBack == 1}}">
+      <image class="nav-time-img" src="/image/time.png"></image>
+      <view class="nav-time">{{title}}</view>
+    </view>
   </view>
 </view>

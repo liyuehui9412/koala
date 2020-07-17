@@ -5,7 +5,8 @@ import Config from '../../utils/config.js';
 
 let app = getApp();
 let context = null;
-let ctx = null
+let ctx = null;
+let titleFun = null;
 
 Page({
   data: {
@@ -23,6 +24,8 @@ Page({
     itemCount:1,
     rightCount:0,
     errorCount:0,
+    title:'60:00',
+    titleSecond: 3600
   },
   onLoad (options) {
     let that = this;
@@ -38,6 +41,27 @@ Page({
         titleTypeTop:12
       })
     }
+
+    clearInterval(titleFun);
+    titleFun = setInterval(function(){
+      console.log(111)
+      let titleSecond = that.data.titleSecond;
+      titleSecond--;
+      if(titleSecond <= 0){
+        // 倒计时结束
+
+        clearInterval(titleFun)
+        return
+      }
+      let minute = parseInt(titleSecond / 60);
+      let second = parseInt(titleSecond % 60);
+      that.setData({
+        title: Util.formatNumber(minute) +':'+ Util.formatNumber(second),
+        titleSecond: titleSecond
+      })
+      
+    },1000)
+
 
   },
   onReady () {
@@ -140,10 +164,10 @@ Page({
         "limit":"10",
         "page": pages + ''
       }
-      let url = `/getSubjectOne/${app.globalData.userObj.id}`
+      let url = `/examinationOne/${app.globalData.userObj.id}`
       // 判断科目一还是科目四
       // if(1){
-      //   url = `/getSubjectFour/${app.globalData.userObj.id}`
+      //   url = `/examinationFour/${app.globalData.userObj.id}`
       // }
 
       request('POST', url , params, 1)
