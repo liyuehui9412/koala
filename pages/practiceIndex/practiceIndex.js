@@ -152,7 +152,7 @@ Page({
 		wx.navigateTo({
 			url: `/pages/answer/answer?type=${
 				that.data.currentNav ? 1 : 4
-			}&alreadyNum=${that.data.topicOneAnswerCount.already}`,
+			}&alreadyNum=${that.data.topicOneAnswerCount.already || 0}`,
 		})
 	},
 	jumpToTest() {
