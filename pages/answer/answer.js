@@ -213,6 +213,9 @@ Page({
             },
           ]
           list[i].choose = false;
+          // if(i % 2 == 0){
+          //   list[i].type = '多选';
+          // }
           list[i].answerArray = obj; 
         }
 
@@ -308,7 +311,7 @@ Page({
           answerStr +=question[current].answerArray[i].chooseItem
         }else{
           if(question[current].answerArray[i].isRight){
-            question[current].answerArray[i].isSelect = true;
+            // question[current].answerArray[i].isSelect = true;
           }
         }
       }

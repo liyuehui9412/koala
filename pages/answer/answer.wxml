@@ -16,9 +16,10 @@
             </view>
 
             <block wx:for="{{item.answerArray}}" wx:key='itemIndex' wx:for-item="itemAnswer"  wx:for-index="itemIndex">
-              <!-- 正确答案 -->
-              <view class="answer-item {{item.choose && itemAnswer.isRight ? 'answer-right':'' }}" 
-                wx:if="{{item.choose && itemAnswer.isRight && itemAnswer.chooseTitle != '' }}" 
+
+              <!-- 正确答案 单选 -->
+              <view class="answer-item {{ item.choose && itemAnswer.isRight ? 'answer-right':'' }}" 
+                wx:if="{{item.choose && itemAnswer.isRight && itemAnswer.chooseTitle != '' && item.type != '多选' }}" 
                 data-answer="{{itemAnswer.chooseItem}}"
                 data-id="{{item.id}}"
                 data-index="{{itemIndex}}"
@@ -27,6 +28,19 @@
                 <image src="/image/right.png" class="item-img item-right"></image>
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
+              <!-- 正确答案 多选 -->
+              <view class="answer-item {{ item.choose && itemAnswer.isRight ? 'answer-right':'' }}" 
+                wx:if="{{itemAnswer.isSelect && item.choose && itemAnswer.isRight && itemAnswer.chooseTitle != '' && item.type == '多选' }}" 
+                data-answer="{{itemAnswer.chooseItem}}"
+                data-id="{{item.id}}"
+                data-index="{{itemIndex}}"
+                bindtap="selectAnswer"
+              >
+                <image src="/image/right.png" class="item-img item-right"></image>
+                <view class="item-content">{{itemAnswer.chooseTitle}}</view>
+              </view>
+
+
               <!-- 选择错误 -->
               <view class="answer-item {{itemAnswer.isSelect && !itemAnswer.isRight ? 'answer-error':'' }}" 
                 wx:if="{{ item.choose && itemAnswer.isSelect && !itemAnswer.isRight && itemAnswer.chooseTitle != '' }}"
@@ -45,7 +59,8 @@
                 data-index="{{itemIndex}}"
                 bindtap="selectAnswer"
               >
-                <view class="item-default">{{itemAnswer.chooseItem}}</view>
+                <image src="/image/right.png" class="item-img item-right" wx:if="{{item.choose && item.type == '多选' && itemAnswer.isRight}}"></image>
+                <view class="item-default" wx:else>{{itemAnswer.chooseItem}}</view>
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
 
