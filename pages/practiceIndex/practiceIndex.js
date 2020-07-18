@@ -125,7 +125,8 @@ Page({
 			if (res.code == 0) {
 				console.log(res)
 				this.setData({
-					oneLast3Achievement: res.result || 0,
+					oneLast3Achievement: res.aver || 0,
+					topicFourAchievement: res.aver || 0,
 				})
 			}
 		})
@@ -137,7 +138,7 @@ Page({
 		).then((res) => {
 			if (res.code == 0) {
 				this.setData({
-					fourLast3Achievement: res.result || 0,
+					fourLast3Achievement: res.aver || 0,
 				})
 			}
 		})
