@@ -27,7 +27,8 @@ Page({
     subject:1 ,  //1/4
     time:0,
     alreadyNum:0,
-    wrong:false
+    wrong:false,
+    surplusCount:0
 
   },
   onLoad (options) {
@@ -39,7 +40,7 @@ Page({
     that.setData({
       time:0,
       subject: options.type,
-      alreadyNum:parseInt(options.alreadyNum) ,
+      // alreadyNum:parseInt(options.alreadyNum) ,
       navMarginTop: marginTop,
       statusBarHeight: screenHeight - marginTop
     })
@@ -63,6 +64,7 @@ Page({
     },1000)
 
     this.getTopic()
+    this.getAnswerCount()
 
   },
   onHide(){
@@ -96,6 +98,28 @@ Page({
   onUnload(){
     clearInterval(titleFun);
   }, 
+  // 请求已做题目数量
+  getAnswerCount(){
+    let that = this;
+    request(
+			'get',
+			`/getAnswerCount/${app.globalData.userObj.id}/${this.data.subject}`,
+			{},
+			1,
+		).then((res) => {
+			if (res.code == 0) {
+        console.log(res)
+        
+        let surplusCount = res.result.all - res.result.already;
+        that.setData({
+          surplusCount: surplusCount,
+          alreadyNum:res.result.already
+        })
+
+      }
+    })
+
+  },
     // 绘制底层浅色圆
     drawProgressbg(){
       // 使用 wx.createContext 获取绘图上下文 context
@@ -198,8 +222,6 @@ Page({
       .then(res=>{
         console.log('res',res)
         let list = res.result.list ;
-        pages++;
-
         for(let i=0; i<list.length; i++){
           let index = list[i].answer.indexOf('')
           let obj = [
@@ -243,9 +265,15 @@ Page({
 
         let concatArray = question.concat(list)
 
+        if( pages == 1){
+          that.setData({
+            totalCount: res.result.totalCount
+          })
+        }
+        pages++;
+
         that.setData({
           question: concatArray,
-          totalCount: res.result.totalCount,
           pages:pages,
         })
       })
@@ -351,7 +379,7 @@ Page({
         params.isWrong = 0
 
         setTimeout(function(){
-          if(current+1 >= totalCount){
+          if(current+1 >= question.length){
             return
           }
           that.setData({
@@ -406,10 +434,7 @@ Page({
 
         setTimeout(function(){
 
-          console.log('current',current)
-          console.log('totalCount',totalCount)
-
-          if(current+1 >= totalCount){
+          if(current+1 >= question.length){
             return
           }
           that.setData({
@@ -435,8 +460,9 @@ Page({
     // 答题
     answerFun(params){
       console.log('params',params)
+      let that = this;
+      let wrong = this.data.wrong;
       let url = '/answerSubjectOne'
-
       // 判断是科目一还是科目四
       if(this.data.subject == 4){
         url = '/answerSubjectFour'
@@ -446,8 +472,11 @@ Page({
       .then(res=>{
         console.log('res',res)
 
-
-
+        if(!wrong){
+          that.setData({
+            alreadyNum: res.already
+          })
+        }
 
       })
 
