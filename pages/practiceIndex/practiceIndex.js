@@ -89,7 +89,7 @@ Page({
 	getAnswerCount() {
 		request(
 			'get',
-			`/getAnswerCount/1/${app.globalData.userObj.id}`,
+			`/getAnswerCount/${app.globalData.userObj.id}/1`,
 			{},
 			1,
 		).then((res) => {
@@ -103,7 +103,7 @@ Page({
 		})
 		request(
 			'get',
-			`/getAnswerCount/4/${app.globalData.userObj.id}`,
+			`/getAnswerCount/${app.globalData.userObj.id}/4`,
 			{},
 			1,
 		).then((res) => {
@@ -151,9 +151,7 @@ Page({
 	jumpToTest() {
 		let that = this
 		wx.navigateTo({
-			url: `/pages/examAnswer/examAnswer?type=${
-				that.data.currentNav ? 1 : 4
-			}`,
+			url: `/pages/examAnswer/examAnswer?type=${that.data.currentNav ? 1 : 4}`,
 		})
 	},
 	/**
