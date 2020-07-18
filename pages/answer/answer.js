@@ -182,13 +182,13 @@ Page({
       // 判断科目一还是科目四
       if(that.data.subject == 4){ 
         if(wrong){
-          url = `/wrong/${app.globalData.userObj.id}/${that.data.subject}`
+          url = `/getWrongListOne/${app.globalData.userObj.id}`
         }else{
           url = `/getSubjectFour/${app.globalData.userObj.id}`
         }
       }else{
         if(wrong){
-          url = `/wrong/${app.globalData.userObj.id}/${that.data.subject}`
+          url = `/getWrongListFour/${app.globalData.userObj.id}`
         }else{
           url = `/getSubjectOne/${app.globalData.userObj.id}`
         }

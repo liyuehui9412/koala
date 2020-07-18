@@ -177,14 +177,12 @@ Page({
 				let sumPe = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 100)
 
 					activeLeft = activeLeft - 40
-				
-				console.log(activeLeft, 1111)
 
 				this.setData({
 					fourPracticeAnswerCount: res.result,
 					activeWidth: activeWidth,
 					activeLeft: activeLeft,
-					sumPe:sumPe
+					sumPe: sumPe
 				})
 			}
 		})
