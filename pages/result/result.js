@@ -192,7 +192,7 @@ Page({
 			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true'})
 		} else {
 			wx.redirectTo({
-				url: '/pages/examAnswer/examAnswer?type=' + this.data.type + '&wrong=true',
+				url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true',
 			})
 		}
 	},
@@ -201,7 +201,7 @@ Page({
 			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type })
 		} else {
 			wx.redirectTo({
-				url: '/pages/examAnswer/examAnswer?type=' + this.data.type,
+				url: '/pages/answer/answer?type=' + this.data.type,
 			})
 		}
 	},

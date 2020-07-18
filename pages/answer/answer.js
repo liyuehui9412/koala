@@ -307,6 +307,7 @@ Page({
       let current = this.data.current;
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
+      let totalCount = this.data.totalCount;
       let id = e.currentTarget.dataset.id;
       let answerStr = '';
 
@@ -345,11 +346,16 @@ Page({
       if(answerStr == question[current].answer){
         rightCount++;
         params.isWrong = 0
+
         setTimeout(function(){
+          if(current+1 > totalCount){
+            return
+          }
           that.setData({
             current: current+1
           })
         },150)
+  
 
       }else{
         errorCount++;
@@ -368,6 +374,7 @@ Page({
     // 单选 / 判断
     radioAnswer(id,answer,index,question,current,rightCount,errorCount){
       let that = this;
+      let totalCount = this.data.totalCount;
       if( question[current].choose ){
           return;
       }
@@ -387,11 +394,16 @@ Page({
       if(answer == question[current].answer){
         rightCount++;
         params.isWrong = 0
+
         setTimeout(function(){
+          if(current+1 > totalCount){
+            return
+          }
           that.setData({
             current: current+1
           })
         },150)
+  
 
       }else{
         errorCount++;
@@ -419,7 +431,14 @@ Page({
       request('POST', url , params, 1)
       .then(res=>{
         console.log('res',res)
+
+
+
+
       })
+
+
+
 
 
     },
