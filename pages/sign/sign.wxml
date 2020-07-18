@@ -51,7 +51,7 @@
 					<swiper
 						autoplay="true"
 						circular="true"
-						interval="8000"
+						interval="3000"
 					>
 						<block wx:for="{{ swiperData }}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 							<swiper-item>

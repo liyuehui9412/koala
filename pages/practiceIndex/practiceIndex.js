@@ -38,8 +38,6 @@ Page({
 			headUrl: app.globalData.userObj.avatarUrl,
 			userName: app.globalData.userObj.nickName,
 		})
-		this.getAnswerCount()
-		this.getLast3Achievement()
 	},
 
 	/**
@@ -50,7 +48,10 @@ Page({
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function() {},
+	onShow: function() {
+		this.getAnswerCount()
+		this.getLast3Achievement()
+	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
