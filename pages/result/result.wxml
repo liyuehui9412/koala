@@ -45,8 +45,8 @@
     <view class="result_sum">本次共答错<text class="sum_num">{{wrongNum}}</text>题</view>
     <view class="result_hint">现在回顾，错题记得更牢固</view>
     <view class="result_btn">
-      <button class="btn_back" hover-class="btn_back_hover">错题回顾</button>
-      <button class="btn_exercise" hover-class="btn_exercise_hover">刷题练习</button>
+      <button class="btn_back" hover-class="btn_back_hover" bindtap="wrongPractice">错题回顾</button>
+      <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="jumpToPractice">刷题练习</button>
     </view>
   </view>
   <view class="result_all_right">

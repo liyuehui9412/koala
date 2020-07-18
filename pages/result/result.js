@@ -4,8 +4,8 @@ import { request } from '../../utils/api'
 import Config from '../../utils/config.js'
 
 let app = getApp()
-let ctx = null;
-let context = null;
+let ctx = null
+let context = null
 Page({
 	data: {
 		navMarginTop: '',
@@ -21,11 +21,13 @@ Page({
 			already: '',
 			all: '',
 		},
-		activeWidth:0
+		activeWidth: 0,
 	},
 	onLoad: function(options) {
 		console.log('options', options)
-		let percentage = parseInt(((options.practiceNum - options.wrongNum) / options.practiceNum) * 100)
+		let percentage = parseInt(
+			((options.practiceNum - options.wrongNum) / options.practiceNum) * 100,
+		)
 		let that = this
 		that.setData({
 			navMarginTop: app.globalData.marginTop,
@@ -33,7 +35,7 @@ Page({
 			wrongNum: options.wrongNum,
 			practiceTime: options.practiceTime,
 			practiceNum: options.practiceNum,
-			percentage,
+			percentage: percentage || 0,
 		})
 		this.getAnswerCount()
 		this.countInterval(percentage)
@@ -59,11 +61,10 @@ Page({
 		let angle = 360 / gridNum // 计算每个栅格间隔角度（最好能整除）
 		let bgc = '#C4F2E9' // 圆的背景色
 
-
 		for (let i = 0; i < gridNum; i++) {
 			ctx.beginPath()
 			ctx.setLineWidth(10)
-			ctx.setStrokeStyle('#C4F2E9' )
+			ctx.setStrokeStyle('#C4F2E9')
 			ctx.setLineCap('butt')
 			ctx.arc(
 				x,
@@ -87,7 +88,6 @@ Page({
 		// 设置一个原点(100,100)，半径为90的圆的路径到当前路径
 		ctx.stroke() // 对当前路径进行描边
 		ctx.draw()
-
 	},
 	// 绘制上层
 	drawCircle: function(step, i) {
@@ -143,9 +143,9 @@ Page({
 	},
 	//    定时器绘制
 	countInterval: function(percentage) {
-		let that = this;
+		let that = this
 		// 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
-		percentage = percentage * 0.6;
+		percentage = percentage * 0.6
 		that.drawProgressbg()
 		this.countTimer = setInterval(() => {
 			if (that.data.count <= percentage) {
@@ -171,21 +171,37 @@ Page({
 		).then((res) => {
 			if (res.code == 0) {
 				console.log(res)
-				let activeWidth = parseInt((res.result.already / res.result.all) *100) + "%";
-				let activeLeft = (res.result.already / res.result.all)  * 690
-				if(activeLeft <= 40){
+				let activeWidth =
+					parseInt((res.result.already / res.result.all) * 100) + '%'
+				let activeLeft = (res.result.already / res.result.all) * 690
+				if (activeLeft <= 40) {
 					activeLeft = activeLeft - 40
 				}
 
 				this.setData({
 					fourPracticeAnswerCount: res.result,
-					activeWidth:activeWidth,
-					activeLeft:activeLeft
+					activeWidth: activeWidth,
+					activeLeft: activeLeft,
 				})
-
-
-
 			}
 		})
+	},
+	wrongPractice() {
+		if (this.data.type == 1) {
+			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type })
+		} else {
+			wx.redirectTo({
+				url: '/pages/examAnswer/examAnswer?type=' + this.data.type,
+			})
+		}
+	},
+	jumpToPractice() {
+		if (this.data.type == 1) {
+			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type })
+		} else {
+			wx.redirectTo({
+				url: '/pages/examAnswer/examAnswer?type=' + this.data.type,
+			})
+		}
 	},
 })
