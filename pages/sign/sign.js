@@ -21,11 +21,16 @@ Page({
 			'https://static.kaolakaola.cn/tiku/swiper3.png',
 		],
 		remindData: [
-			'用户：花里胡晒在一分钟前报名功',
-			'用户：花里胡晒在2分钟前报成功',
-			'用户：花里胡晒3一分钟名成功',
-			'用户：花里胡在一钟前报名成功',
-			'用户：花里胡晒5分钟前报名成功',
+			'学员135****4473在1分钟前报名',
+			'学员137****2538在6分钟前报名',
+			'学员137****9613在11分钟前报名',
+			'学员136****9574在25分钟前报名',
+			'学员138****9947在33分钟前报名',
+			'学员139****9256在38分钟前报名',
+			'学员135****8356在40分钟前报名',
+			'学员133****4455在51分钟前报名',
+			'学员137****6679在53分钟前报名',
+			'学员139****4400在58分钟前报名',
 		],
 		surplus: 35,
 		price: 0,
@@ -325,6 +330,9 @@ Page({
 				},
 				1,
 			).then((res) => {
+				console.log(res)
+				app.globalData.userInfo = res.result
+				app.globalData.userObj = res.result
 				if (!app.globalData.phone) {
 					this.setData({
 						get_phone_show: true,
@@ -333,7 +341,6 @@ Page({
 					this.sign_action()
 				}
 			})
-			app.globalData.userInfo = res.detail.userInfo
 		}
 	},
 })

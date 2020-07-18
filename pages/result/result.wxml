@@ -49,10 +49,10 @@
       <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="jumpToPractice">刷题练习</button>
     </view>
   </view>
-  <view class="result_all_right">
+  <!-- <view class="result_all_right">
     <view class="all_right_hint">再做一次，记忆更牢固！</view>
    <button class="btn_back" hover-class="btn_back_hover">刷题练习</button>
-  </view>
+  </view> -->
 
 
 </view>
