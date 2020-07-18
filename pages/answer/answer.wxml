@@ -71,7 +71,7 @@
                 data-index="{{itemIndex}}"
                 bindtap="selectAnswer"
               >
-                <view class="item-default">{{itemAnswer.chooseItem}}</view>
+                <view class="item-default item-default-more">{{itemAnswer.chooseItem}}</view>
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
 

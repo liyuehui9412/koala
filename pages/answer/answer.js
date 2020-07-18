@@ -307,10 +307,13 @@ Page({
       let current = this.data.current;
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
-      let totalCount = this.data.totalCount;
+      let totalCount = 500;
       let id = e.currentTarget.dataset.id;
       let answerStr = '';
-
+      let wrong = this.data.wrong;
+      if( wrong ){
+        totalCount = this.data.totalCount;
+      }
       let isChoose = false;
       for(let i=0;i < question[current].answerArray.length ;i++){
         if(question[current].answerArray[i].isSelect){
@@ -348,7 +351,7 @@ Page({
         params.isWrong = 0
 
         setTimeout(function(){
-          if(current+1 > totalCount){
+          if(current+1 >= totalCount){
             return
           }
           that.setData({
@@ -374,7 +377,13 @@ Page({
     // 单选 / 判断
     radioAnswer(id,answer,index,question,current,rightCount,errorCount){
       let that = this;
-      let totalCount = this.data.totalCount;
+      let totalCount = 500;
+      let wrong = this.data.wrong;
+      if( wrong ){
+        totalCount = this.data.totalCount;
+      }
+
+
       if( question[current].choose ){
           return;
       }
@@ -396,7 +405,11 @@ Page({
         params.isWrong = 0
 
         setTimeout(function(){
-          if(current+1 > totalCount){
+
+          console.log('current',current)
+          console.log('totalCount',totalCount)
+
+          if(current+1 >= totalCount){
             return
           }
           that.setData({
@@ -409,6 +422,7 @@ Page({
         errorCount++;
         params.isWrong = 1
       }
+      
 
       this.setData({
         question:question,

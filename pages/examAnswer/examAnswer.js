@@ -398,7 +398,7 @@ Page({
         errorCount++;
       }
       setTimeout(function(){
-        if(current+1 > totalCount.length){
+        if(current+1 >= totalCount.length){
           return
         }
         that.setData({
@@ -454,7 +454,7 @@ Page({
       }
 
       setTimeout(function(){
-        if(current+1 > totalCount){
+        if(current+1 >= totalCount){
           return
         }
         that.setData({
