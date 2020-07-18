@@ -216,54 +216,68 @@ Page({
           ksList: ksList
         })
         
-        for(let i=0; i<list.length; i++){
-          let index = list[i].answer.indexOf('')
-          let obj = [
-            {
-              chooseItem:'A',
-              chooseTitle:list[i].answerA,
-              isSelect:false,
-              isRight: list[i].answer.indexOf("A") >= 0 ? true : false
-            },
-            {
-              chooseItem:'B',
-              chooseTitle:list[i].answerB,
-              isSelect:false,
-              isRight: list[i].answer.indexOf("B") >= 0 ? true : false
-            },
-            {
-              chooseItem:'C',
-              chooseTitle:list[i].answerC,
-              isSelect:false,
-              isRight: list[i].answer.indexOf("C") >= 0 ? true : false
-            },
-            {
-              chooseItem:'D',
-              chooseTitle:list[i].answerD,
-              isSelect:false,
-              isRight: list[i].answer.indexOf("D") >= 0 ? true : false
-            },
-            {
-              chooseItem:'E',
-              chooseTitle:list[i].answerE || '',
-              isSelect:false,
-              isRight: list[i].answer.indexOf("E") >= 0 ? true : false
-            },
-          ]
-          list[i].choose = false;
-  
-          list[i].answerArray = obj; 
-        }
-
-        let concatArray = question.concat(list)
-        
-        wx.hideLoading()
+        that.initQuestion(list)
 
         that.setData({
-          question: concatArray,
           totalCount: ksList.length,
         })
+
       })
+    },
+    // 初始化题目
+    initQuestion(array){
+
+      let that = this;
+      let question = this.data.question
+      let list = array;
+      
+      for(let i=0; i<list.length; i++){
+        let index = list[i].answer.indexOf('')
+        let obj = [
+          {
+            chooseItem:'A',
+            chooseTitle:list[i].answerA,
+            isSelect:false,
+            isRight: list[i].answer.indexOf("A") >= 0 ? true : false
+          },
+          {
+            chooseItem:'B',
+            chooseTitle:list[i].answerB,
+            isSelect:false,
+            isRight: list[i].answer.indexOf("B") >= 0 ? true : false
+          },
+          {
+            chooseItem:'C',
+            chooseTitle:list[i].answerC,
+            isSelect:false,
+            isRight: list[i].answer.indexOf("C") >= 0 ? true : false
+          },
+          {
+            chooseItem:'D',
+            chooseTitle:list[i].answerD,
+            isSelect:false,
+            isRight: list[i].answer.indexOf("D") >= 0 ? true : false
+          },
+          {
+            chooseItem:'E',
+            chooseTitle:list[i].answerE || '',
+            isSelect:false,
+            isRight: list[i].answer.indexOf("E") >= 0 ? true : false
+          },
+        ]
+        list[i].choose = false;
+
+        list[i].answerArray = obj; 
+      }
+
+      let concatArray = question.concat(list)
+      
+      wx.hideLoading()
+
+      that.setData({
+        question: concatArray,
+      })
+
     },
     // swiper 切换
     swiperChange(e){
@@ -280,11 +294,10 @@ Page({
       // 分页加载question
       if( index >= ((pages - 1 )*10 + 5) ){ 
         let list = ksList.slice( pages * 10 ,pages * 10 + 10);
-        let newQuestion = question.concat(list)
+        this.initQuestion(list)
         pages++;
         this.setData({
-          pages:pages,
-          question:newQuestion
+          pages:pages
         })
       }
 
