@@ -92,15 +92,15 @@ Page({
   onShow () {
     console.log('app.globalData.marginTop',app.globalData)
 
-    this.setData({
-      question:[],
-      current:0,
-      totalCount:0,
-      itemCount:1,
-      rightCount:0,
-      errorCount:0,
-      pages:1,
-    })
+    // this.setData({
+    //   question:[],
+    //   current:0,
+    //   totalCount:0,
+    //   itemCount:1,
+    //   rightCount:0,
+    //   errorCount:0,
+    //   pages:1,
+    // })
     
   },
   onHide(){
@@ -346,6 +346,7 @@ Page({
       let question = this.data.question; 
       let current = this.data.current;
       let rightCount = this.data.rightCount;
+      let totalCount = this.data.totalCount;
       let errorCount = this.data.errorCount;
       let id = e.currentTarget.dataset.id;
       let score = that.data.score;
@@ -397,6 +398,9 @@ Page({
         errorCount++;
       }
       setTimeout(function(){
+        if(current+1 > totalCount.length){
+          return
+        }
         that.setData({
           current: current+1
         })
@@ -416,6 +420,7 @@ Page({
     radioAnswer(id,answer,index,question,current,rightCount,errorCount){
       let that = this;
       let score = that.data.score;
+      let totalCount = this.data.totalCount;
       if( question[current].choose ){
           return;
       }
@@ -449,6 +454,9 @@ Page({
       }
 
       setTimeout(function(){
+        if(current+1 > totalCount){
+          return
+        }
         that.setData({
           current: current+1
         })
@@ -529,6 +537,10 @@ Page({
         }
       }
 
+      // 答题完成
+      if( errorCount + rightCount >= totalCount){
+        this.uploadPaper()
+      }
     },
     // 右下角交卷
     uploadPaper(){
