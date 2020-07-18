@@ -148,7 +148,7 @@ Page({
 	// 再考一次
 	reTest() {
 		let that = this
-		wx.navigateTo({
+		wx.redirectTo({
 			url: `/pages/examAnswer/examAnswer?type=${that.data.type}`,
 		})
 	},

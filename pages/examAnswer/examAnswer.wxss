@@ -255,7 +255,7 @@ swiper-item{
   background: #f8f8f8;
 }
 .answer-pop{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   height: 100%;

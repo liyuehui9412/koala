@@ -22,6 +22,7 @@ Page({
 			all: '',
 		},
 		activeWidth: 0,
+		sumPe:0
 	},
 	onLoad: function(options) {
 		console.log('options', options)
@@ -171,28 +172,29 @@ Page({
 		).then((res) => {
 			if (res.code == 0) {
 				console.log(res)
-				let activeWidth =
-					parseInt((res.result.already / res.result.all) * 100) + '%'
-				let activeLeft = (res.result.already / res.result.all) * 690
-				if (activeLeft <= 40) {
+				let activeWidth = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
+				let activeLeft = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
+				let sumPe = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 100)
+
 					activeLeft = activeLeft - 40
-				}
+				
 				console.log(activeLeft, 1111)
 
 				this.setData({
 					fourPracticeAnswerCount: res.result,
 					activeWidth: activeWidth,
 					activeLeft: activeLeft,
+					sumPe:sumPe
 				})
 			}
 		})
 	},
 	wrongPractice() {
 		if (this.data.type == 1) {
-			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type })
+			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type + 'wrong=true'})
 		} else {
 			wx.redirectTo({
-				url: '/pages/examAnswer/examAnswer?type=' + this.data.type,
+				url: '/pages/examAnswer/examAnswer?type=' + this.data.type + 'wrong=true',
 			})
 		}
 	},
