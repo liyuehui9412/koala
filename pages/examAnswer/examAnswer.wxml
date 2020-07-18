@@ -48,9 +48,8 @@
                 <view class="item-default">{{itemAnswer.chooseItem}}</view>
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
-
-              <!-- 多选 -->
-              <view class="answer-item {{ itemAnswer.isSelect && item.type == '多选' ? 'answer-more':'' }}" wx:if="{{ !item.choose && itemAnswer.isSelect && itemAnswer.chooseTitle != '' && item.type == '多选' }}"
+                 <!-- 多选 -->
+              <view class="answer-item" wx:if="{{ itemAnswer.isSelect && itemAnswer.chooseTitle != '' && item.type == '多选' }}"
                 data-answer="{{itemAnswer.chooseItem}}"
                 data-id="{{item.id}}"
                 data-index="{{itemIndex}}"
@@ -59,12 +58,22 @@
                 <view class="item-default">{{itemAnswer.chooseItem}}</view>
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
+              <!-- 多选 没有选择但正确 -->
+              <!-- <view class="answer-item" wx:if="{{ item.choose && !itemAnswer.isSelect && itemAnswer.chooseTitle != '' && item.type == '多选' && itemAnswer.isRight }}"
+                data-answer="{{itemAnswer.chooseItem}}"
+                data-id="{{item.id}}"
+                data-index="{{itemIndex}}"
+                bindtap="selectAnswer"
+              >
+                <image src="/image/right.png" class="item-img item-right"></image>
+                <view class="item-content">{{itemAnswer.chooseTitle}}</view>
+              </view> -->
 
             </block>
 
             <button wx:if="{{item.type == '多选' }}" class="answer-more-btn" hover-class="answer-more-btn-hover" bindtap="moreSubmit" data-id="{{item.id}}">确定</button>
 
-            <view wx:if="{{item.choose}}">
+            <!-- <view wx:if="{{item.choose}}">
               <view class="answer-choose"> 正确答案 <text class="choose-right">{{item.answer}}</text></view>
             
               <view class="answer-line"></view>
@@ -77,7 +86,7 @@
                 <view class="info-title"><text class="info-title-tag"></text>试题详解</view>
                 <view class="info-detail">{{item.explanation}}</view>
               </view>
-            </view>
+            </view> -->
 
             <view class="answer-empty"></view>
           </swiper-item>
