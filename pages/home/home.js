@@ -24,8 +24,12 @@ Page({
 
   },
   start(){
+    // wx.navigateTo({
+    //   url: '/pages/examResult/examResult?type=1',
+    // })
     wx.navigateTo({
-      url: '/pages/answer/answer?type=1',
+      // url: '/pages/examResult/examResult?achievement='+23+'&testTime='+ '12:23' +'&highestScore='+ 45 +'&type='+1,
+      url: '/pages/result/result?practiceTime='+'12:23'+'&wrongNum='+ 13  +'&practiceNum='+ 45 +'&type='+1,
     })
   }
   

@@ -25,6 +25,8 @@ Page({
     errorCount:0,
     title:'60:00',
     titleSecond: 3600,
+    pages:1,
+    ksList:[],
 
     modalTitle:'退出考试',
     modalHint:'剩余未做',
@@ -92,6 +94,7 @@ Page({
       itemCount:1,
       rightCount:0,
       errorCount:0,
+      pages:1,
     })
     wx.showLoading({
       title: '加载中',
@@ -206,8 +209,13 @@ Page({
       request('GET', url , {}, 1)
       .then(res=>{
         console.log('res',res)
-        let list = res.result.ksList ;
+        let ksList = res.result.ksList ;
+        let list = ksList.slice(0,10);
 
+        that.setData({
+          ksList: ksList
+        })
+        
         for(let i=0; i<list.length; i++){
           let index = list[i].answer.indexOf('')
           let obj = [
@@ -249,13 +257,11 @@ Page({
 
         let concatArray = question.concat(list)
         
-        setTimeout(function(){
-          wx.hideLoading()
-        },1500)
+        wx.hideLoading()
 
         that.setData({
           question: concatArray,
-          totalCount: list.length,
+          totalCount: ksList.length,
         })
       })
     },
@@ -263,11 +269,24 @@ Page({
     swiperChange(e){
       console.log(e)
       let index = e.detail.current;
+      let pages = parseInt(this.data.pages) ;
+      let ksList = this.data.ksList ;
+      let question = this.data.question ;
 
       this.setData({
         itemCount: index+1,
         current: index
       })
+      // 分页加载question
+      if( index >= ((pages - 1 )*10 + 5) ){ 
+        let list = ksList.slice( pages * 10 ,pages * 10 + 10);
+        let newQuestion = question.concat(list)
+        pages++;
+        this.setData({
+          pages:pages,
+          question:newQuestion
+        })
+      }
 
     },
     // 选择答案

@@ -4,11 +4,11 @@ import { request } from '../../utils/api'
 import Config from '../../utils/config.js'
 
 let app = getApp()
-
+let ctx = null;
+let context = null;
 Page({
 	data: {
 		navMarginTop: '',
-		progress_txt: '正在匹配中...',
 		count: 0, // 设置 计数器 初始为0
 		countTimer: null, // 设置 定时器 初始为null
 		gridNum: 60, //内层圆点数
@@ -21,10 +21,11 @@ Page({
 			already: '',
 			all: '',
 		},
+		activeWidth:0
 	},
 	onLoad: function(options) {
 		console.log('options', options)
-		let percentage = (options.wrongNum / options.practiceNum) * 10
+		let percentage = parseInt(((options.practiceNum - options.wrongNum) / options.practiceNum) * 100)
 		let that = this
 		that.setData({
 			navMarginTop: app.globalData.marginTop,
@@ -45,7 +46,9 @@ Page({
 	// 绘制底层浅色圆
 	drawProgressbg: function() {
 		// 使用 wx.createContext 获取绘图上下文 context
-		let ctx = wx.createCanvasContext('canvasProgressbg')
+		ctx = wx.createCanvasContext('canvasProgressbg')
+		// ctx.clearRect(0, 0, 200, 200)
+		// ctx.save()
 		let gridNum = this.data.gridNum
 		// 内层底圈栅格圆
 		let in_r = 84 //内层圆半径
@@ -55,10 +58,13 @@ Page({
 		let lineWidth = 10 // 圆的宽度
 		let angle = 360 / gridNum // 计算每个栅格间隔角度（最好能整除）
 		let bgc = '#C4F2E9' // 圆的背景色
+
+
 		for (let i = 0; i < gridNum; i++) {
 			ctx.beginPath()
-			ctx.setLineWidth(lineWidth)
-			ctx.setStrokeStyle(bgc)
+			ctx.setLineWidth(10)
+			ctx.setStrokeStyle('#C4F2E9' )
+			ctx.setLineCap('butt')
 			ctx.arc(
 				x,
 				y,
@@ -72,7 +78,6 @@ Page({
 		}
 		ctx.stroke()
 		ctx.save()
-
 		// 外层底圈圆
 		ctx.setLineWidth(lineWidth) // 设置圆环的宽度
 		ctx.setStrokeStyle(bgc) // 设置圆环的颜色
@@ -82,10 +87,13 @@ Page({
 		// 设置一个原点(100,100)，半径为90的圆的路径到当前路径
 		ctx.stroke() // 对当前路径进行描边
 		ctx.draw()
+
 	},
 	// 绘制上层
 	drawCircle: function(step, i) {
-		var context = wx.createCanvasContext('canvasProgress')
+		context = wx.createCanvasContext('canvasProgress')
+		context.clearRect(0, 0, 200, 200)
+		context.save()
 		let gridNum = this.data.gridNum
 		// 内层底圈栅格圆
 		let in_r = 84 //内层圆半径
@@ -135,19 +143,20 @@ Page({
 	},
 	//    定时器绘制
 	countInterval: function(percentage) {
+		let that = this;
 		// 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
-		percentage = percentage * 3
+		percentage = percentage * 0.6;
+		that.drawProgressbg()
 		this.countTimer = setInterval(() => {
-			if (this.data.count <= percentage) {
-				console.log('count', this.data.count)
+			if (that.data.count <= percentage) {
+				// console.log('count', this.data.count)
 				/* 绘制彩色圆环进度条  
         注意此处 传参 step 取值范围是0到2，
         所以 计数器 最大值 60 对应 2 做处理，计数器count=60的时候step=2 */
-				this.drawCircle(this.data.count / (60 / 2))
-				this.data.count++
+				that.drawCircle(that.data.count / (60 / 2))
+				that.data.count++
 			} else {
-				this.setData({ progress_txt: '匹配成功' })
-				clearInterval(this.countTimer)
+				clearInterval(that.countTimer)
 			}
 		}, 50)
 	},
@@ -156,15 +165,26 @@ Page({
 		console.log('323232')
 		request(
 			'get',
-			`/getAnswerCount/${this.data.type}/${app.globalData.userObj.id}`,
+			`/getAnswerCount/${app.globalData.userObj.id}/${this.data.type}`,
 			{},
 			1,
 		).then((res) => {
 			if (res.code == 0) {
 				console.log(res)
+				let activeWidth = parseInt((res.result.already / res.result.all) *100) + "%";
+				let activeLeft = (res.result.already / res.result.all)  * 690
+				if(activeLeft <= 40){
+					activeLeft = activeLeft - 40
+				}
+
 				this.setData({
 					fourPracticeAnswerCount: res.result,
+					activeWidth:activeWidth,
+					activeLeft:activeLeft
 				})
+
+
+
 			}
 		})
 	},
