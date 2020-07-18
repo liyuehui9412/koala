@@ -49,6 +49,9 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function() {
+		this.setData({
+			currentNav: true,
+		})
 		this.getAnswerCount()
 		this.getLast3Achievement()
 	},
@@ -147,7 +150,9 @@ Page({
 	jumpToPractice() {
 		let that = this
 		wx.navigateTo({
-			url: `/pages/answer/answer?type=${that.data.currentNav ? 1 : 4}`,
+			url: `/pages/answer/answer?type=${
+				that.data.currentNav ? 1 : 4
+			}&alreadyNum=${that.data.topicOneAnswerCount.already}`,
 		})
 	},
 	jumpToTest() {
