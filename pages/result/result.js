@@ -156,7 +156,7 @@ Page({
 		console.log('323232')
 		request(
 			'get',
-			`/getAnswerCount/${this.data.type}/${app.globalData.userObj.id}`,
+			`/getAnswerCount/${app.globalData.userObj.id}/${this.data.type}`,
 			{},
 			1,
 		).then((res) => {
