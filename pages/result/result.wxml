@@ -34,7 +34,7 @@
       <view class="detail_info_word">题</view>
     </view>
     <view class="detail_surplus">
-      剩余未做{{fourPracticeAnswerCount.all}}题
+      剩余未做{{fourPracticeAnswerCount.all - fourPracticeAnswerCount.already}}题
     </view>
   </view>
   <view class="result_line">

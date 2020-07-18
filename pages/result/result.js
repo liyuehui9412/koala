@@ -177,6 +177,7 @@ Page({
 				if (activeLeft <= 40) {
 					activeLeft = activeLeft - 40
 				}
+				console.log(activeLeft, 1111)
 
 				this.setData({
 					fourPracticeAnswerCount: res.result,
