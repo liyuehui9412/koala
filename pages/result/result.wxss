@@ -60,6 +60,10 @@
   font-family:DINAlternate-Bold,DINAlternate;
   font-weight:bold;
   color:rgba(255,255,255,1);
+  font-family:DIN;
+}
+.text_num_per{
+  font-size:46px;
 }
 
 .result_header{
@@ -90,6 +94,7 @@
   font-weight:bold;
   color:rgba(51,51,51,1);
   margin: 16rpx 0;
+  font-family:DIN;
 }
 .info_item_title{
   width: 100%;
@@ -143,7 +148,7 @@
   position: relative;
 }
 .result_line_active{
-  width:64rpx;
+  width:0;
   height:12rpx;
   background:linear-gradient(270deg,rgba(0,223,199,1) 0%,rgba(0,188,150,1) 100%);
   border-radius:12rpx;

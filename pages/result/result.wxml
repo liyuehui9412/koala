@@ -9,7 +9,7 @@
       <canvas class="progress_canvas" canvas-id="canvasProgress">  </canvas>
       <view class="progress_text">
         <view class="text_title">正确率</view>
-        <view class="text_num">{{percentage}}%</view>
+        <view class="text_num">{{percentage}}<text class="text_num_per">%</text></view>
       </view>  
     </view>
     <view class="header_info">
@@ -38,8 +38,8 @@
     </view>
   </view>
   <view class="result_line">
-    <view class="result_line_active"></view>
-    <view class="result_line_hint"><text class="hint_trigon"></text> 10%</view>
+    <view class="result_line_active"  style='width:{{activeWidth}}'></view>
+    <view class="result_line_hint" style="left:{{activeLeft}}rpx"><text class="hint_trigon"></text> {{activeWidth}}</view>
   </view>
   <view>
     <view class="result_sum">本次共答错<text class="sum_num">{{wrongNum}}</text>题</view>

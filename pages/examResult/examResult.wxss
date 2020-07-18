@@ -68,6 +68,7 @@
   font-family:DIN;
   font-weight:bold;
   color:#00BC96;
+  margin-bottom: 4px;
 }
 .text_num_fail{
   color: #FF6363;
@@ -118,6 +119,7 @@
   font-weight:bold;
   color:#fff;
   margin: 16rpx 0;
+  font-family:DIN;
 }
 .info_item_title{
   width: 100%;

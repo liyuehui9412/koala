@@ -4,11 +4,12 @@ import Api from '../../utils/api.js'
 import Config from '../../utils/config.js'
 
 let app = getApp()
+let ctx = null;
+let context = null;
 
 Page({
 	data: {
 		navMarginTop: '',
-		progress_txt: '正在匹配中...',
 		count: 0, // 设置 计数器 初始为0
 		countTimer: null, // 设置 定时器 初始为null
 		gridNum: 60, //内层圆点数
@@ -38,7 +39,9 @@ Page({
 	// 绘制底层浅色圆
 	drawProgressbg: function() {
 		// 使用 wx.createContext 获取绘图上下文 context
-		let ctx = wx.createCanvasContext('canvasProgressbg')
+		ctx = wx.createCanvasContext('canvasProgressbg')
+		// ctx.clearRect(0, 0, 200, 200)
+		// ctx.save()
 		let gridNum = this.data.gridNum
 		// 内层底圈栅格圆
 		let in_r = 70 //内层圆半径
@@ -51,7 +54,7 @@ Page({
 		for (let i = 0; i < gridNum; i++) {
 			ctx.beginPath()
 			ctx.setLineWidth(2)
-			ctx.setStrokeStyle(bgc)
+			ctx.setStrokeStyle('#fff')
 			ctx.arc(
 				x,
 				y,
@@ -77,7 +80,9 @@ Page({
 	},
 	// 绘制上层
 	drawCircle: function(step, i) {
-		var context = wx.createCanvasContext('canvasProgress')
+		context = wx.createCanvasContext('canvasProgress')
+		context.clearRect(0, 0, 200, 200)
+		context.save()
 		let gridNum = this.data.gridNum
 		// 内层底圈栅格圆
 		let in_r = 70 //内层圆半径
@@ -122,22 +127,23 @@ Page({
 	},
 	//    定时器绘制
 	countInterval: function(achievement) {
+		let that = this;
 		achievement = achievement * 0.3
 		// 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
+		that.drawProgressbg()
 
 		this.countTimer = setInterval(() => {
-			if (this.data.count <= achievement) {
-				console.log('count', this.data.count)
+			if (that.data.count <= achievement) {
+				console.log('count', that.data.count)
 				/* 绘制彩色圆环进度条  
         注意此处 传参 step 取值范围是0到2，
         所以 计数器 最大值 60 对应 2 做处理，计数器count=60的时候step=2 */
-				this.drawCircle(this.data.count / (30 / 2))
-				this.data.count++
+				that.drawCircle(that.data.count / (30 / 2))
+				that.data.count++
 			} else {
-				this.setData({ progress_txt: '匹配成功' })
-				clearInterval(this.countTimer)
+				clearInterval(that.countTimer)
 			}
-		}, 30)
+		}, 60)
 	},
 	// 再考一次
 	reTest() {

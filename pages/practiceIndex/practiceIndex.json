@@ -1,5 +1,5 @@
 {
-	"usingComponents": {
-		"nav": "/components/navigation/navigation"
-	}
+  "usingComponents": {
+    "nav": "/components/navigation/navigation"
+  }
 }
