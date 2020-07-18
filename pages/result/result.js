@@ -189,10 +189,10 @@ Page({
 	},
 	wrongPractice() {
 		if (this.data.type == 1) {
-			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type + 'wrong=true'})
+			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true'})
 		} else {
 			wx.redirectTo({
-				url: '/pages/examAnswer/examAnswer?type=' + this.data.type + 'wrong=true',
+				url: '/pages/examAnswer/examAnswer?type=' + this.data.type + '&wrong=true',
 			})
 		}
 	},

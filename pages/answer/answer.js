@@ -39,7 +39,7 @@ Page({
     that.setData({
       time:0,
       subject: options.type,
-      alreadyNum: options.alreadyNum,
+      alreadyNum:parseInt(options.alreadyNum) ,
       navMarginTop: marginTop,
       statusBarHeight: screenHeight - marginTop
     })
@@ -180,20 +180,20 @@ Page({
       let url = ''
 
       // 判断科目一还是科目四
-      if(that.data.subject == 4){ 
+      if(that.data.subject == 4){
         if(wrong){
-          url = `/getWrongListOne/${app.globalData.userObj.id}`
+          url = `/getWrongListFour/${app.globalData.userObj.id}` 
         }else{
           url = `/getSubjectFour/${app.globalData.userObj.id}`
         }
       }else{
         if(wrong){
-          url = `/getWrongListFour/${app.globalData.userObj.id}`
+          url = `/getWrongListOne/${app.globalData.userObj.id}`
         }else{
           url = `/getSubjectOne/${app.globalData.userObj.id}`
         }
       }
-      
+        console.log('url',url)
       request('POST', url , params, 1)
       .then(res=>{
         console.log('res',res)
