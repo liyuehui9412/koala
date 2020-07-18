@@ -78,6 +78,11 @@ Page({
       
     },1000)
 
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    this.getTopic()
 
   },
   onReady () {
@@ -96,14 +101,10 @@ Page({
       errorCount:0,
       pages:1,
     })
-    wx.showLoading({
-      title: '加载中',
-    })
-    this.getTopic()
     
   },
   onHide(){
-    clearInterval(titleFun);
+    // clearInterval(titleFun);
   }, 
   onUnload(){
     clearInterval(titleFun);
@@ -475,7 +476,7 @@ Page({
       let num = 30;
       num = (rightCount + errorCount)/totalCount * 30;
 
-      if(subject == 1 && errorCount > 10){
+      if(subject == 1 && errorCount == 11){
         // 科目一错10题
           this.setData({
             modalTitle:'考试不合格',
@@ -487,7 +488,7 @@ Page({
           })
           this.drawProgressbg();
           this.countInterval( num );
-      }else if(subject == 4 && errorCount > 5){
+      }else if(subject == 4 && errorCount == 6){
         // 科目四错5题
           this.setData({
             modalTitle:'考试不合格',

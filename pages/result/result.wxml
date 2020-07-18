@@ -38,10 +38,11 @@
     </view>
   </view>
   <view class="result_line">
-    <view class="result_line_active"  style='width:{{activeWidth}}'></view>
-    <view class="result_line_hint" style="left:{{activeLeft}}rpx"><text class="hint_trigon"></text> {{activeWidth}}</view>
+    <view class="result_line_active"  style='width:{{activeWidth}}rpx'></view>
+    <view class="result_line_hint" style="left:{{activeLeft}}rpx"><text class="hint_trigon"></text> {{sumPe}}%</view>
   </view>
-  <view>
+
+  <view wx:if="{{wrongNum > 0}}">
     <view class="result_sum">本次共答错<text class="sum_num">{{wrongNum}}</text>题</view>
     <view class="result_hint">现在回顾，错题记得更牢固</view>
     <view class="result_btn">
@@ -49,10 +50,11 @@
       <button class="btn_exercise" hover-class="btn_exercise_hover" bindtap="jumpToPractice">刷题练习</button>
     </view>
   </view>
-  <!-- <view class="result_all_right">
+
+  <view class="result_all_right" wx:else>
     <view class="all_right_hint">再做一次，记忆更牢固！</view>
-   <button class="btn_back" hover-class="btn_back_hover">刷题练习</button>
-  </view> -->
+    <button class="btn_back" hover-class="btn_back_hover" bindtap="jumpToPractice">刷题练习</button>
+  </view>
 
 
 </view>

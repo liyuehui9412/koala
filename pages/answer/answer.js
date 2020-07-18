@@ -25,9 +25,13 @@ Page({
     rightCount:0,
     errorCount:0,
     subject:1 ,  //1/4
-    time:0
+    time:0,
+    alreadyNum:0,
+    wrong:false
+
   },
   onLoad (options) {
+    console.log('options',options)
     let that = this;
     let screenHeight = app.globalData.systemInfo.screenHeight;
     let marginTop = app.globalData.marginTop;
@@ -35,12 +39,18 @@ Page({
     that.setData({
       time:0,
       subject: options.type,
+      alreadyNum: options.alreadyNum,
       navMarginTop: marginTop,
       statusBarHeight: screenHeight - marginTop
     })
     if(app.globalData.platform == 'android'){
       that.setData({
         titleTypeTop:12
+      })
+    }
+    if( options.wrong ){
+      that.setData({
+        wrong: options.type 
       })
     }
 
@@ -52,10 +62,11 @@ Page({
       })
     },1000)
 
+    this.getTopic()
 
   },
   onHide(){
-    clearInterval(titleFun);
+    // clearInterval(titleFun);
   }, 
   onUnload(){
     clearInterval(titleFun);
@@ -77,7 +88,6 @@ Page({
       errorCount:0,
     })
 
-    this.getTopic()
     
   },
   onHide(){
@@ -159,19 +169,31 @@ Page({
       let that = this;
       let pages = parseInt(that.data.pages) ;
       let question = that.data.question ;
-      let answerArray = that.data.answerArray;
+      let wrong = that.data.wrong ;
+      let answerArray = that.data.answerArray; 
       console.log('question',question)
       // question.splice(0,5)
       let params={
         "limit":"10",
         "page": pages + ''
       }
-      let url = `/getSubjectOne/${app.globalData.userObj.id}`
-      // 判断科目一还是科目四
-      if(that.data.subject == 4){
-        url = `/getSubjectFour/${app.globalData.userObj.id}`
-      }
+      let url = ''
 
+      // 判断科目一还是科目四
+      if(that.data.subject == 4){ 
+        if(wrong){
+          url = `/wrong/${app.globalData.userObj.id}/${that.data.subject}`
+        }else{
+          url = `/getSubjectFour/${app.globalData.userObj.id}`
+        }
+      }else{
+        if(wrong){
+          url = `/wrong/${app.globalData.userObj.id}/${that.data.subject}`
+        }else{
+          url = `/getSubjectOne/${app.globalData.userObj.id}`
+        }
+      }
+      
       request('POST', url , params, 1)
       .then(res=>{
         console.log('res',res)
