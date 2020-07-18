@@ -87,5 +87,6 @@ App({
 		phone: null,
 		userObj: {}, // 项目内用户信息
 		price: null, // 价格
+		currentNav: true, // 首页点击状态
 	},
 })

@@ -35,7 +35,7 @@
         <view class="content_hint">加深印象，乘胜追击！</view>
       </view>
     </view>
-    <button class="again_btn" hover-class="again_btn_hover"  wx:if="{{isPass}}" bindtap="reTest">在考一次</button>
+    <button class="again_btn" hover-class="again_btn_hover"  wx:if="{{isPass}}" bindtap="reTest">再考一次</button>
     <button class="again_btn {{isPass ? '':'again_btn_fail'}}" hover-class="again_btn_hover {{isPass ? '':'again_btn_hover_fail'}}" wx:else bindtap="reTest">重新考试</button>
   </view>
 

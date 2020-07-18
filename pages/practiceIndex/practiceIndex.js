@@ -50,7 +50,7 @@ Page({
 	 */
 	onShow: function() {
 		this.setData({
-			currentNav: true,
+			currentNav: app.globalData.currentNav,
 		})
 		this.getAnswerCount()
 		this.getLast3Achievement()
@@ -81,6 +81,7 @@ Page({
 			topicOneAnswerCount: this.data.onePracticeAnswerCount,
 			topicFourAchievement: this.data.oneLast3Achievement,
 		})
+		app.globalData.currentNav = true
 	},
 	clickFour() {
 		this.setData({
@@ -88,6 +89,7 @@ Page({
 			topicOneAnswerCount: this.data.fourPracticeAnswerCount,
 			topicFourAchievement: this.data.fourLast3Achievement,
 		})
+		app.globalData.currentNav = false
 	},
 	// 做过多少题
 	getAnswerCount() {
@@ -105,19 +107,22 @@ Page({
 				})
 			}
 		})
-		request(
-			'get',
-			`/getAnswerCount/${app.globalData.userObj.id}/4`,
-			{},
-			1,
-		).then((res) => {
-			if (res.code == 0) {
-				console.log(res)
-				this.setData({
-					fourPracticeAnswerCount: res.result,
-				})
-			}
-		})
+		request('get', `/getAnswerCount/${app.globalData.userObj.id}/4`, {}, 1)
+			.then((res) => {
+				if (res.code == 0) {
+					console.log(res)
+					this.setData({
+						fourPracticeAnswerCount: res.result,
+					})
+				}
+			})
+			.then(() => {
+				if (this.data.currentNav) {
+					this.clickOne()
+				} else {
+					this.clickFour()
+				}
+			})
 	},
 	getLast3Achievement() {
 		request(
@@ -134,18 +139,21 @@ Page({
 				})
 			}
 		})
-		request(
-			'get',
-			`/getLast3Achievement/4/${app.globalData.userObj.id}`,
-			{},
-			1,
-		).then((res) => {
-			if (res.code == 0) {
-				this.setData({
-					fourLast3Achievement: res.aver || 0,
-				})
-			}
-		})
+		request('get', `/getLast3Achievement/4/${app.globalData.userObj.id}`, {}, 1)
+			.then((res) => {
+				if (res.code == 0) {
+					this.setData({
+						fourLast3Achievement: res.aver || 0,
+					})
+				}
+			})
+			.then(() => {
+				if (this.data.currentNav) {
+					this.clickOne()
+				} else {
+					this.clickFour()
+				}
+			})
 	},
 	jumpToPractice() {
 		let that = this
