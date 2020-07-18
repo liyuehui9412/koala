@@ -591,7 +591,7 @@ Page({
     paper(){
       let score = this.data.score;
       let subject = this.data.subject;
-      let titleSecond = 3600 - this.data.titleSecond;
+      let titleSecond = 2700 - this.data.titleSecond;
       let params = {
         userId: app.globalData.userObj.id,
         "achievement": score,
