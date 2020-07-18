@@ -125,7 +125,7 @@
   margin-right: 16rpx;
 }
 .detail_info_num{
-  font-size:28rpx;
+  font-size:32rpx;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color:rgba(0,188,150,1);

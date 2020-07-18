@@ -100,7 +100,7 @@
 	color: #F7E5CB;
 	font-size: 32rpx;
 	line-height: 100rpx;
-	text-indent: 60rpx;
+	text-indent: 40rpx;
 	background:linear-gradient(360deg,rgba(29,29,29,1) 0%,rgb(85, 55, 55) 100%);
 }
 
