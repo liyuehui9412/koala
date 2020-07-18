@@ -7,6 +7,8 @@ App({
 		console.log(options)
 		if (Object.keys(options.query).length > 0) {
 			this.globalData.businessInfo = options.query.businessInfo
+		} else {
+			this.globalData.businessInfo.schoolCode = ''
 		}
 		// 登录
 		wx.login({
@@ -75,13 +77,15 @@ App({
 		systemInfo: null,
 		marginTop: 64,
 		proportion: null,
-		businessInfo: null, // 商户信息，由options传入
+		businessInfo: {
+			schoolCode: '',
+		}, // 商户信息，由options传入
 		platform: null, // ios还是安卓
 		openId: null,
 		windowHeight: null,
 		sessionKey: null,
 		phone: null,
-		userObj: null, // 项目内用户信息
+		userObj: {}, // 项目内用户信息
 		price: null, // 价格
 	},
 })
