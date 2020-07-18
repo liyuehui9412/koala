@@ -78,15 +78,15 @@ Page({
   onShow () {
     console.log('app.globalData.marginTop',app.globalData)
 
-    this.setData({
-      question:[],
-      pages:1,
-      current:0,
-      totalCount:0,
-      itemCount:1,
-      rightCount:0,
-      errorCount:0,
-    })
+    // this.setData({
+    //   question:[],
+    //   pages:1,
+    //   current:0,
+    //   totalCount:0,
+    //   itemCount:1,
+    //   rightCount:0,
+    //   errorCount:0,
+    // })
 
     
   },
