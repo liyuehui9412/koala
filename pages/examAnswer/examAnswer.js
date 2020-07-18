@@ -23,8 +23,8 @@ Page({
     itemCount:1,
     rightCount:0,
     errorCount:0,
-    title:'60:00',
-    titleSecond: 3600,
+    title:'45:00',
+    titleSecond: 2700,
     pages:1,
     ksList:[],
 
@@ -266,7 +266,9 @@ Page({
           },
         ]
         list[i].choose = false;
-
+        // if(i % 2 == 0){
+        //   list[i].type = '多选';
+        // }
         list[i].answerArray = obj; 
       }
 
@@ -384,15 +386,20 @@ Page({
         }else{
           score += 2
         }
-        setTimeout(function(){
-          that.setData({
-            current: current+1
-          })
-        },150)
+        // setTimeout(function(){
+        //   that.setData({
+        //     current: current+1
+        //   })
+        // },150)
 
       }else{
         errorCount++;
       }
+      setTimeout(function(){
+        that.setData({
+          current: current+1
+        })
+      },150)
 
       this.setData({
         question:question,
@@ -429,16 +436,22 @@ Page({
           score += 2
         }
 
-        setTimeout(function(){
-          that.setData({
-            current: current+1
-          })
-        },150)
+        // setTimeout(function(){
+        //   that.setData({
+        //     current: current+1
+        //   })
+        // },150)
 
       }else{
         errorCount++;
 
       }
+
+      setTimeout(function(){
+        that.setData({
+          current: current+1
+        })
+      },150)
 
       this.setData({
         question:question,
