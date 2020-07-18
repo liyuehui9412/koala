@@ -49,7 +49,7 @@
                 <view class="item-content">{{itemAnswer.chooseTitle}}</view>
               </view>
                  <!-- 多选 -->
-              <view class="answer-item" wx:if="{{ itemAnswer.isSelect && itemAnswer.chooseTitle != '' && item.type == '多选' }}"
+              <view class="answer-item {{ itemAnswer.isSelect && item.type == '多选' ? 'answer-more':'' }}" wx:if="{{ !item.choose && itemAnswer.isSelect && itemAnswer.chooseTitle != '' && item.type == '多选' }}"
                 data-answer="{{itemAnswer.chooseItem}}"
                 data-id="{{item.id}}"
                 data-index="{{itemIndex}}"
