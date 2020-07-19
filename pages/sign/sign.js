@@ -199,8 +199,8 @@ Page({
 		console.log(app.globalData.phone)
 		if (app.globalData.phone) {
 			if (this.data.isIos === 'IOS') {
-				// this.iosPayAction()
-				this.toPay()
+				this.iosPayAction()
+				// this.toPay()
 			} else {
 				this.toPay()
 			}
@@ -218,7 +218,7 @@ Page({
 				wx.showToast({
 					title: '客服微信号已复制成功，请添加微信客服', //提示的内容,
 					icon: 'none', //图标,
-					duration: 4000, //延迟时间,
+					duration: 5000, //延迟时间,
 					mask: true, //显示透明蒙层，防止触摸穿透,
 				})
 			},
