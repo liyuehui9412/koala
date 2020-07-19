@@ -76,9 +76,9 @@
 
             <button wx:if="{{item.type == '多选' }}" class="answer-more-btn" hover-class="answer-more-btn-hover" bindtap="moreSubmit" data-id="{{item.id}}">确定</button>
 
-            <view class="answer-choose"> 正确答案 <text class="choose-right">{{item.answer}}</text></view>
+            <!-- <view class="answer-choose"> 正确答案 <text class="choose-right">{{item.answer}}</text></view> -->
             
-            <!-- <view wx:if="{{item.choose}}">
+            <view wx:if="{{item.choose}}">
               <view class="answer-choose"> 正确答案 <text class="choose-right">{{item.answer}}</text></view>
             
               <view class="answer-line"></view>
@@ -91,7 +91,7 @@
                 <view class="info-title"><text class="info-title-tag"></text>试题详解</view>
                 <view class="info-detail">{{item.explanation}}</view>
               </view>
-            </view> -->
+            </view>
 
             <view class="answer-empty"></view>
           </swiper-item>
