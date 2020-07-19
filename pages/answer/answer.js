@@ -201,7 +201,7 @@ Page({
       } else {
         params = {
           "limit": "10",
-          "page": 0,
+          "page": "0",
           "maxId": maxId
         }
         url = `/getSubjectFour/${app.globalData.userObj.id}`
