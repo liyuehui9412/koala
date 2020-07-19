@@ -113,8 +113,8 @@
     </view>
     <view class="bottom-right">
 	  <image class="bottom-right-img" src="/image/topic.png"></image>
-    <text class="bottom-right-num" wx:if='{{wrong}}'>{{ rightCount + errorCount }}</text>
-    <text class="bottom-right-num" wx:else >{{ alreadyNum }}</text>
+    <text class="bottom-right-num" wx:if='{{wrong}}'>{{ current + 1 }}</text>
+    <text class="bottom-right-num" wx:else >{{ question[current].id }}</text>
     /
     <text wx:if='{{wrong}}'>{{totalCount}}</text> 
     <text wx:else>500</text> 

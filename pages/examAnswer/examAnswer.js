@@ -57,7 +57,6 @@ Page({
 
     clearInterval(titleFun);
     titleFun = setInterval(function(){
-      console.log(111)
       let titleSecond = that.data.titleSecond;
       titleSecond--;
       if(titleSecond <= 0){
@@ -199,7 +198,7 @@ Page({
       let that = this;
       let question = that.data.question ;
       let answerArray = that.data.answerArray;
-      console.log('question',question)
+      // console.log('question',question)
 
       let url = `/examinationOne`
       // 判断科目一还是科目四
@@ -209,9 +208,9 @@ Page({
 
       request('GET', url , {}, 1)
       .then(res=>{
-        console.log('res',res)
+        // console.log('res',res)
         let ksList = res.result.ksList ;
-        let list = ksList.slice(0,10);
+        let list = res.result.ksList.slice(0,10);
 
         that.setData({
           ksList: ksList
@@ -380,7 +379,7 @@ Page({
         }
       }
 
-      console.log('answerStr',answerStr)
+      // console.log('answerStr',answerStr)
       if(answerStr == question[current].answer){
         rightCount++;
         if(that.data.subject == 1){
@@ -566,7 +565,6 @@ Page({
     },
     // 左上角返回函数
     backFun (e) {
-      console.log('backfun11111111')
      
       let num = 30;
       let totalCount = this.data.totalCount;
@@ -583,7 +581,7 @@ Page({
         modalBtnRight:'继续答题',
         isQuit:true
       })
-      console.log('num',num)
+      // console.log('num',num)
       this.drawProgressbg();
       this.countInterval( num );
 
@@ -618,10 +616,10 @@ Page({
       let second = parseInt(titleSecond % 60);
       let testTime = Util.formatNumber(minute) +':'+ Util.formatNumber(second);
 
-      console.log('params',params)
+      // console.log('params',params)
       request('POST', `/submitAchievement` , params, 1)
       .then(res=>{
-        console.log('paper',res)
+        // console.log('paper',res)
         wx.hideLoading()
         wx.showToast({
           title: '提交成功',

@@ -134,7 +134,7 @@ Page({
 
 		this.countTimer = setInterval(() => {
 			if (that.data.count <= achievement) {
-				console.log('count', that.data.count)
+				// console.log('count', that.data.count)
 				/* 绘制彩色圆环进度条  
         注意此处 传参 step 取值范围是0到2，
         所以 计数器 最大值 60 对应 2 做处理，计数器count=60的时候step=2 */

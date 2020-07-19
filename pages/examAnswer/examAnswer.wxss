@@ -88,6 +88,11 @@ swiper-item{
   justify-content: center;
   align-items: center;
 }
+.item-default-more{
+  background: #CCCCCC;
+  border: none;
+  color: #fff;
+}
 .item-img{
   margin: 0 32rpx 0 40rpx;
   height: 56rpx;

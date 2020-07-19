@@ -163,7 +163,7 @@ Page({
 	},
 	// 做过多少题
 	getAnswerCount() {
-		console.log('323232')
+		// console.log('323232')
 		request(
 			'get',
 			`/getAnswerCount/${app.globalData.userObj.id}/${this.data.type}`,
@@ -171,7 +171,7 @@ Page({
 			1,
 		).then((res) => {
 			if (res.code == 0) {
-				console.log(res)
+				// console.log(res)
 				let activeWidth = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
 				let activeLeft = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
 				let sumPe = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 100)
