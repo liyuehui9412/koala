@@ -125,9 +125,10 @@
           <view class="text_title">{{modalHint}}</view>
           <view class="text_num" wx:if="{{modalStatus == 0 || modalStatus == 2 }}">{{totalCount - (rightCount + errorCount)}}题</view>
           <view class="text_num text_num_error" wx:if="{{modalStatus == 1}}">{{errorCount}}题</view>
+          <view class="text_num text_num_error" wx:if="{{modalStatus == 5}}">{{totalCount - (rightCount + errorCount)}}题</view>
         </view>
       </view>
-      <view class="pop-hint" wx:if="{{modalStatus == 0 || modalStatus == 2}}">您还有 <text class="pop-hint-num">{{totalCount - (rightCount + errorCount)}}</text> 题未做</view>
+      <view class="pop-hint" wx:if="{{modalStatus == 0 || modalStatus == 2 || modalStatus == 5}}">您还有 <text class="pop-hint-num">{{totalCount - (rightCount + errorCount)}}</text> 题未做</view>
       <view class="pop-hint" wx:elif="{{modalStatus == 1}}">未作答{{totalCount - (rightCount + errorCount)}}题 当前考试得分{{score}}分</view>
       <view class="pop-hint" wx:elif="{{modalStatus == 3}}">本次考试已超时，考试合格</view>
       <view class="pop-hint" wx:elif="{{modalStatus == 4}}">本次考试已超时，考试不合格</view>

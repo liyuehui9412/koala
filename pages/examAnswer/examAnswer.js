@@ -30,7 +30,7 @@ Page({
 
     modalTitle:'退出考试',
     modalHint:'剩余未做',
-    modalStatus: 0 , // 0 退出考试/交卷， 1 考试不合格，2 交卷， 3 超时合格， 4 超时不合格
+    modalStatus: 0 , // 0 退出考试/交卷， 1 考试不合格，2 交卷， 3 超时合格， 4 超时不合格 5交卷不合格
     modalBtnLeft:'退出',
     modalBtnRight:'继续答题',
 
@@ -121,7 +121,7 @@ Page({
       let lineWidth = 8 ; // 圆的宽度
     
       ctx.setLineWidth( lineWidth ); // 设置圆环的宽度
-      if(modalStatus == 1 || modalStatus == 4){
+      if(modalStatus == 1 || modalStatus == 4 || modalStatus == 5){
         ctx.setStrokeStyle( '#FBEBEE' ); // 设置圆环的颜色
       }else{
         ctx.setStrokeStyle( '#C4F2E9' ); // 设置圆环的颜色
@@ -147,7 +147,7 @@ Page({
       let lineWidth = 8 ; // 圆的宽度
       // 设置渐变
       var gradient = context.createLinearGradient(0, 0, 0, 200);
-      if(modalStatus == 1 || modalStatus == 4){
+      if(modalStatus == 1 || modalStatus == 4 || modalStatus == 5){
         gradient.addColorStop("0", "#FF6A6E");
         gradient.addColorStop("0.4", "#FF6A6E");
         gradient.addColorStop("0.8", "#FF9391");
@@ -488,7 +488,7 @@ Page({
           this.setData({
             modalTitle:'考试不合格',
             modalHint:'您已答错',
-            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'退出',
             modalBtnRight:'继续答题',
             isQuit:true
@@ -500,7 +500,7 @@ Page({
           this.setData({
             modalTitle:'考试不合格',
             modalHint:'您已答错',
-            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'退出',
             modalBtnRight:'继续答题',
             isQuit:true
@@ -515,7 +515,7 @@ Page({
           this.setData({
             modalTitle:'考试合格',
             modalHint:'您已超时',
-            modalStatus: 3 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalStatus: 3 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'现在交卷',
             modalBtnRight:'取消',
             isQuit:true
@@ -526,7 +526,7 @@ Page({
           this.setData({
             modalTitle:'考试不合格',
             modalHint:'您已超时',
-            modalStatus: 4 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+            modalStatus: 4 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'现在交卷',
             modalBtnRight:'取消',
             isQuit:true
@@ -548,17 +548,30 @@ Page({
       let totalCount = this.data.totalCount;
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
+      let score = this.data.score;
   
       num = (rightCount + errorCount)/totalCount * 30;
+      if(score >= 90){
+        this.setData({
+          modalTitle:'交卷',
+          modalHint:'剩余未做',
+          modalStatus: 2 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
+          modalBtnLeft:'现在交卷',
+          modalBtnRight:'取消',
+          isQuit:true
+        })
+      }else{
+        this.setData({
+          modalTitle:'交卷',
+          modalHint:'剩余未做',
+          modalStatus: 5 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
+          modalBtnLeft:'现在交卷',
+          modalBtnRight:'取消',
+          isQuit:true
+        })
+      }
 
-      this.setData({
-        modalTitle:'交卷',
-        modalHint:'剩余未做',
-        modalStatus: 2 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
-        modalBtnLeft:'现在交卷',
-        modalBtnRight:'取消',
-        isQuit:true
-      })
+
       this.drawProgressbg();
       this.countInterval( num );
 
@@ -576,7 +589,7 @@ Page({
       this.setData({
         modalTitle:'退出考试',
         modalHint:'剩余未做',
-        modalStatus: 0 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格
+        modalStatus: 0 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
         modalBtnLeft:'退出',
         modalBtnRight:'继续答题',
         isQuit:true
