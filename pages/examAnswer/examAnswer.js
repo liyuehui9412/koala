@@ -35,7 +35,8 @@ Page({
     modalBtnRight:'继续答题',
 
     score:0,
-    subject:1   //1/4
+    subject:1,   //1/4
+    isShowError:true
 
   },
   onLoad (options) {
@@ -482,13 +483,14 @@ Page({
       let rightCount = this.data.rightCount;
       let errorCount = this.data.errorCount;
       let score = this.data.score;
-      let subject = this.data.subject;
+      let subject = this.data.subject; 
       let titleSecond = this.data.titleSecond;
+      let isShowError = this.data.isShowError;
 
       let num = 30;
       num = (rightCount + errorCount)/totalCount * 30;
 
-      if(subject == 1 && errorCount == 11){
+      if(subject == 1 && errorCount == 11 && isShowError){
         // 科目一错10题
           this.setData({
             modalTitle:'考试不合格',
@@ -496,11 +498,13 @@ Page({
             modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'退出',
             modalBtnRight:'继续答题',
-            isQuit:true
+            isQuit:true,
+            isShowError:false
           })
           this.drawProgressbg();
           this.countInterval( num );
-      }else if(subject == 4 && errorCount == 6){
+      }
+      if(subject == 4 && errorCount == 6){
         // 科目四错5题
           this.setData({
             modalTitle:'考试不合格',
@@ -508,7 +512,8 @@ Page({
             modalStatus: 1 , // 0 退出考试 1 考试不合格 2 交卷 3 超时合格 4 超时不合格 5交卷不合格
             modalBtnLeft:'退出',
             modalBtnRight:'继续答题',
-            isQuit:true
+            isQuit:true,
+            isShowError:false
           })
           this.drawProgressbg();
           this.countInterval( num );
