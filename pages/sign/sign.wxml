@@ -53,6 +53,8 @@
 						circular="true"
 						interval="3000"
 						indicator-dots="true"
+						indicator-color="#E2D0B2"
+						indicator-active-color="#3C3C3C"
 						style="height:252rpx;"
 					>
 						<block wx:for="{{ swiperData }}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
@@ -100,7 +102,7 @@
 		<view>科一/科四必考500题 </view>
 		<view class="price">￥{{price}}</view>
 		<image class="sign_btn_image" src="../../image/sign_btn.png"></image>
-		<view class="sign_btn_text" bindtap="sign_action">立即报名</view>
+		<view class="sign_btn_text" bindtap="sign_action">{{isIos == 'IOS' ? '咨询客服' : '立即报名'}}</view>
 		<button
 			wx:if="{{ canIUse }}"
 			class="opcity_get_user_info"
