@@ -66,7 +66,7 @@ const doubleClick = () => {
   let lastTime = getStorage('myDate') || 0;
   let myDate = new Date().getTime();
   let doubleClick;
-  if (myDate - lastTime > 700) {
+  if (myDate - lastTime > 300) {
     setStorage('myDate', myDate);//存值
     doubleClick = false;
   } else {

@@ -306,9 +306,11 @@ Page({
   // swiper 切换
   swiperChange(e) {
     console.log(e)
-    // if(e.detail.source != 'touch'){
-    //   return 
-    // }
+
+    let doubleClick = Util.doubleClick();//判断重复点击
+    if (doubleClick) {
+      return;
+    }
     let index = parseInt(e.detail.current);
     let pages = parseInt(this.data.pages);
     let wrong = this.data.wrong;
