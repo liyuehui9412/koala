@@ -284,6 +284,9 @@ Page({
     // swiper 切换
     swiperChange(e){
       console.log(e)
+      if(e.detail.source != 'touch'){
+        return 
+      }
       let index = e.detail.current;
       let pages = parseInt(this.data.pages) ;
       let ksList = this.data.ksList ;
