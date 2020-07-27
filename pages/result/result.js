@@ -22,9 +22,17 @@ Page({
 			all: '',
 		},
 		activeWidth: 0,
-		sumPe:0
+		sumPe: 0,
 	},
 	onLoad: function(options) {
+		if (
+			app.globalData.info.flag === 0 ||
+			app.globalData.info.user.userStatus === 0
+		) {
+			wx.reLaunch({
+				url: '/pages/sign/sign',
+			})
+		}
 		console.log('options', options)
 		let percentage = parseInt(
 			((options.practiceNum - options.wrongNum) / options.practiceNum) * 100,
@@ -172,24 +180,32 @@ Page({
 		).then((res) => {
 			if (res.code == 0) {
 				// console.log(res)
-				let activeWidth = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
-				let activeLeft = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 690)
-				let sumPe = parseInt((parseInt(res.result.already) / parseInt( res.result.all)) * 100)
+				let activeWidth = parseInt(
+					(parseInt(res.result.already) / parseInt(res.result.all)) * 690,
+				)
+				let activeLeft = parseInt(
+					(parseInt(res.result.already) / parseInt(res.result.all)) * 690,
+				)
+				let sumPe = parseInt(
+					(parseInt(res.result.already) / parseInt(res.result.all)) * 100,
+				)
 
-					activeLeft = activeLeft - 40
+				activeLeft = activeLeft - 40
 
 				this.setData({
 					fourPracticeAnswerCount: res.result,
 					activeWidth: activeWidth,
 					activeLeft: activeLeft,
-					sumPe: sumPe
+					sumPe: sumPe,
 				})
 			}
 		})
 	},
 	wrongPractice() {
 		if (this.data.type == 1) {
-			wx.redirectTo({ url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true'})
+			wx.redirectTo({
+				url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true',
+			})
 		} else {
 			wx.redirectTo({
 				url: '/pages/answer/answer?type=' + this.data.type + '&wrong=true',
@@ -205,4 +221,5 @@ Page({
 			})
 		}
 	},
+	onShareAppMessage: function() {},
 })

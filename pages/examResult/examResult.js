@@ -4,8 +4,8 @@ import Api from '../../utils/api.js'
 import Config from '../../utils/config.js'
 
 let app = getApp()
-let ctx = null;
-let context = null;
+let ctx = null
+let context = null
 
 Page({
 	data: {
@@ -20,6 +20,14 @@ Page({
 		highestScore: '',
 	},
 	onLoad: function(options) {
+		if (
+			app.globalData.info.flag === 0 ||
+			app.globalData.info.user.userStatus === 0
+		) {
+			wx.reLaunch({
+				url: '/pages/sign/sign',
+			})
+		}
 		let that = this
 		that.setData({
 			navMarginTop: app.globalData.marginTop,
@@ -127,7 +135,7 @@ Page({
 	},
 	//    定时器绘制
 	countInterval: function(achievement) {
-		let that = this;
+		let that = this
 		achievement = achievement * 0.3
 		// 设置倒计时 定时器 每100毫秒执行一次，计数器count+1 ,耗时6秒绘一圈
 		that.drawProgressbg()
@@ -152,4 +160,5 @@ Page({
 			url: `/pages/examAnswer/examAnswer?type=${that.data.type}`,
 		})
 	},
+	onShareAppMessage: function() {},
 })

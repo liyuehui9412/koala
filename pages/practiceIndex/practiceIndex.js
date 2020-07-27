@@ -32,6 +32,14 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
+		if (
+			app.globalData.info.flag === 0 ||
+			app.globalData.info.user.userStatus === 0
+		) {
+			wx.reLaunch({
+				url: '/pages/sign/sign',
+			})
+		}
 		let that = this
 		that.setData({
 			navMarginTop: app.globalData.marginTop,

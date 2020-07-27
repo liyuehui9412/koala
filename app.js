@@ -5,11 +5,6 @@ App({
 		let that = this
 		// 获取商户信息
 		console.log(options)
-		if (Object.keys(options.query).length > 0) {
-			this.globalData.businessInfo = options.query.businessInfo
-		} else {
-			this.globalData.businessInfo.schoolCode = ''
-		}
 		// 登录
 		wx.login({
 			success: (res) => {
@@ -49,7 +44,7 @@ App({
 	loadUserStatus() {
 		// 查询用户信息，是否报过名，报过名去首页，没报名去报名
 		request('get', `/${this.globalData.openId}`, {}, 1).then((res) => {
-			console.log(res)
+			this.globalData.info = res.result
 			this.globalData.userObj = res.result.user
 			if (res.result.flag === 0) {
 				wx.reLaunch({
@@ -73,7 +68,10 @@ App({
 		})
 	},
 	globalData: {
-		userInfo: null, // 微信用户基本信息
+		userInfo: {
+			avatarUrl: '',
+			nickName: ''
+		}, // 微信用户基本信息
 		systemInfo: null,
 		marginTop: 64,
 		proportion: null,
@@ -88,5 +86,6 @@ App({
 		userObj: {}, // 项目内用户信息
 		price: null, // 价格
 		currentNav: true, // 首页点击状态
+		info: null,
 	},
 })

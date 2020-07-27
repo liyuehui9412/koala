@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -57,6 +57,10 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
@@ -66,6 +70,13 @@
 					"pathName": "pages/wikipediaDetail/wikipediaDetail",
 					"query": "detail=%7B%22articleId%22%3A%22760%22%2C%22orderId%22%3A%220%22%2C%22wenwenId%22%3A%221541657543095_2354455%22%2C%22sequence%22%3A%220%22%2C%22source%22%3A%222%22%7D&from=2",
 					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "schooleCode=0001",
+					"scene": null
 				}
 			]
 		}
